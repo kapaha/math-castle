@@ -17,5 +17,10 @@
     "bugs": {
         "url": "https://github.com/kapaha/castle-game/issues"
     },
-    "homepage": "https://github.com/kapaha/castle-game#readme"
+    "homepage": "https://github.com/kapaha/castle-game#readme",
+    "devDependencies": {
+        "eslint": "^7.30.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.23.4"
+    }
 }
