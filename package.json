@@ -1,0 +1,29 @@
+{
+    "name": "castle-game",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "private": true,
+    "scripts": {
+        "lint": "eslint .",
+        "format": "prettier --write ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kapaha/castle-game.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/kapaha/castle-game/issues"
+    },
+    "homepage": "https://github.com/kapaha/castle-game#readme",
+    "devDependencies": {
+        "eslint": "^7.30.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.23.4",
+        "prettier": "^2.3.2"
+    }
+}
