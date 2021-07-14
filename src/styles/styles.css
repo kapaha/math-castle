@@ -1,6 +1,20 @@
+:root {
+    --game-board-height: 400px;
+}
+
 #game-board {
     margin: auto;
     background-color: rgb(69, 115, 136);
-    height: 400px;
+    height: var(--game-board-height);
     width: 900px;
+    position: relative;
+}
+
+#castle {
+    width: 200px;
+    height: var(--game-board-height);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: black;
 }
