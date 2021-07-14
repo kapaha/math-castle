@@ -1,0 +1,6 @@
+#game-board {
+    margin: auto;
+    background-color: rgb(69, 115, 136);
+    height: 400px;
+    width: 900px;
+}
