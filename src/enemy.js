@@ -24,11 +24,11 @@ class Enemy {
 
     draw() {
         // draw the enemy to different position
-        this.style.transform = `translate(${this.pos.x}, ${this.pos.y})`;
+        this.element.style.transform = `translate(${this.pos.x}px, ${this.pos.y}px)`;
     }
 
     delete() {
-        // enemt died
+        // enemy died
     }
 }
 
