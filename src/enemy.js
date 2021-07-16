@@ -1,65 +1,32 @@
+/* eslint-disable class-methods-use-this */
 // enemy class
 class Enemy {
-    // private properties
-    _element = document.createElement('div');
-    _width = 50; // enemy size (still not sure about the right size)
-    _height = 50;
-    _x;
-    _y;
-    _speed;
-    _selected; // boolean
-    _question;
-    _answer;
+    constructor(xPos, yPos) {
+        this.element = document.createElement('div').classList.add('enemy');
+        this.pos = { x: xPos, y: yPos };
+        this.width = 50;
+        this.height = 50;
+        this.speed = 1;
+        this.selected = false; // default false (not selected)
+        this.question = '';
+        this.answer = '';
 
-    constructor(x, y) {
-        this._x = x;
-        this._y = y;
+        // setting some enemy css
+        this.element.style.width = `${this.width}px`;
+        this.element.style.height = `${this.height}px`;
     }
 
-    // getters
-    getSpeed = () => {
-        return this._speed;
-    };
+    update() {
+        // update enemy position
+    }
 
-    getSelected = () => {
-        return this._selected;
-    };
+    draw() {
+        // draw the enemy
+    }
 
-    getQuestion = () => {
-        return this._question;
-    };
-
-    getAnswer = () => {
-        return this._answer;
-    };
-
-    // setters
-
-    setSelected = (selected) => {
-        this._selected = selected;
-    };
-
-    setQuestion = () => {
-        // should access questions data and assign it to _question property
-    };
-
-    setAnswer = () => {
-        // should access questions data and assign right answer to _answer property
-    };
-
-    // methods
-
-    _draw = () => {
-        // draw the enemy to the DOM
-    };
-
-    _update = () => {
-        // update enemy x position
-    };
-
-    _delete = () => {
-        // delete enemy once collided or attacked
-    };
+    delete() {
+        // enemt died
+    }
 }
 
 export default Enemy;
