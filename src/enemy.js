@@ -18,10 +18,12 @@ class Enemy {
 
     update() {
         // update enemy position
+        this.pos.x += this.speed;
     }
 
     draw() {
-        // draw the enemy
+        // draw the enemy to different position
+        this.style.transform = `translate(${this.pos.x}, ${this.pos.y})`;
     }
 
     delete() {
