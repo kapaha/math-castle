@@ -1,6 +1,19 @@
 import './styles/styles.css';
 import Enemy from './enemy';
 
-// for testing
-const enemy1 = new Enemy(0, 0);
-enemy1.draw();
+function update() {
+    // update game objects
+}
+
+function draw() {
+    // draw game objects
+}
+
+function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+
+// start the game loop
+requestAnimationFrame(gameLoop);
