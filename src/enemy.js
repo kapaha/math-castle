@@ -2,7 +2,7 @@
 // enemy class
 class Enemy {
     constructor(xPos, yPos) {
-        this.element = document.createElement('div').classList.add('enemy');
+        this.element = document.createElement('div');
         this.pos = { x: xPos, y: yPos };
         this.width = 50;
         this.height = 50;
@@ -12,6 +12,7 @@ class Enemy {
         this.answer = '';
 
         // setting some enemy css
+        this.element.classList.add('enemy');
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
     }
