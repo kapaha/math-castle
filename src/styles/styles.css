@@ -18,3 +18,10 @@
     right: 0;
     background-color: black;
 }
+
+/* enemy style */
+.enemy {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+}
