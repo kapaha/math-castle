@@ -7,6 +7,24 @@ class Game {
         this.gameBoard = gameBoard;
         this.castle = castle;
         this.enemies = [];
+
+        // bind gameLoop 'this' to Game class
+        this.gameLoop = this.gameLoop.bind(this);
+    }
+
+    start() {
+        this.spawnEnemy();
+
+        // start the game loop
+        requestAnimationFrame(this.gameLoop);
+    }
+
+    gameLoop() {
+        this.update();
+        this.draw();
+
+        // call gameLoop before every browser repaint
+        requestAnimationFrame(this.gameLoop);
     }
 
     update() {
