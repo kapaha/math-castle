@@ -1,10 +1,12 @@
 import Enemy from './enemy';
+import gameBoard from './gameBoard';
+
+const enemies = [];
 
 function enemySpawn() {
-    const enemies = [];
     const enemiesCount = 3;
     const yPos = [62.5, 175, 287.5];
-    const gameBoard = document.getElementById('game-board');
+    const gameBoardElement = gameBoard.element;
 
     for (let i = 0; i < enemiesCount; i++) {
         const enemy = new Enemy(0, yPos[i]);
@@ -12,9 +14,9 @@ function enemySpawn() {
     }
 
     enemies.map((enemy) => {
-        gameBoard.appendChild(enemy.element);
+        gameBoardElement.appendChild(enemy.element);
         enemy.draw();
     });
 }
 
-export default enemySpawn;
+export { enemySpawn, enemies };

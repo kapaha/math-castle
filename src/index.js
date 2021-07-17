@@ -1,6 +1,6 @@
 import './styles/styles.css';
 import Enemy from './enemy';
-import enemySpawn from './enemySpawn';
+import { enemySpawn, enemies } from './enemySpawn';
 
 function update() {
     // update game objects
