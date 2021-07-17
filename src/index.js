@@ -1,5 +1,6 @@
 import './styles/styles.css';
 import Enemy from './enemy';
+import enemySpawn from './enemySpawn';
 
 function update() {
     // update game objects
@@ -17,3 +18,5 @@ function gameLoop() {
 
 // start the game loop
 requestAnimationFrame(gameLoop);
+
+enemySpawn();
