@@ -1,17 +1,12 @@
 import './styles/styles.css';
+import Game from './game';
 import { enemySpawn } from './enemySpawn';
 
-function update() {
-    // update game objects
-}
-
-function draw() {
-    // draw game objects
-}
+const game = new Game();
 
 function gameLoop() {
-    update();
-    draw();
+    game.update();
+    game.draw();
     requestAnimationFrame(gameLoop);
 }
 

@@ -7,6 +7,14 @@ class Game {
         this.castle = castle;
         this.enemies = [];
     }
+
+    update() {
+        this.enemies.forEach((enemy) => enemy.update());
+    }
+
+    draw() {
+        this.enemies.forEach((enemy) => enemy.draw());
+    }
 }
 
 export default Game;
