@@ -1,8 +1,9 @@
 import './styles/styles.css';
 import Game from './game';
-import { enemySpawn } from './enemySpawn';
 
 const game = new Game();
+
+game.spawnEnemy();
 
 function gameLoop() {
     game.update();
@@ -12,5 +13,3 @@ function gameLoop() {
 
 // start the game loop
 requestAnimationFrame(gameLoop);
-
-enemySpawn();
