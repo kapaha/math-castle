@@ -8,12 +8,12 @@ function enemySpawn() {
     const yPos = [62.5, 175, 287.5];
     const gameBoardElement = gameBoard.element;
 
-    for (let i = 0; i < enemiesCount; i++) {
+    for (let i = 0; i < enemiesCount; i += 1) {
         const enemy = new Enemy(0, yPos[i]);
         enemies.push(enemy);
     }
 
-    enemies.map((enemy) => {
+    enemies.forEach((enemy) => {
         gameBoardElement.appendChild(enemy.element);
         enemy.draw();
     });
