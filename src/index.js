@@ -1,21 +1,6 @@
 import './styles/styles.css';
-import { enemySpawn } from './enemySpawn';
+import Game from './game';
 
-function update() {
-    // update game objects
-}
+const game = new Game();
 
-function draw() {
-    // draw game objects
-}
-
-function gameLoop() {
-    update();
-    draw();
-    requestAnimationFrame(gameLoop);
-}
-
-// start the game loop
-requestAnimationFrame(gameLoop);
-
-enemySpawn();
+game.start();
