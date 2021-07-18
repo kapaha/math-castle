@@ -6,6 +6,8 @@ class Game {
     constructor() {
         this.gameBoard = gameBoard;
         this.castle = castle;
+        // width of area enemy can move in
+        this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
 
         // bind gameLoop 'this' to Game class
@@ -28,7 +30,7 @@ class Game {
     }
 
     update() {
-        this.enemies.forEach((enemy) => enemy.update());
+        this.enemies.forEach((enemy) => enemy.update(this));
     }
 
     draw() {
@@ -49,6 +51,10 @@ class Game {
             gameBoardElement.appendChild(enemy.element);
             enemy.draw();
         });
+    }
+
+    deleteEnemy(enemyToDelete) {
+        this.enemies = this.enemies.filter((enemy) => enemy !== enemyToDelete);
     }
 }
 
