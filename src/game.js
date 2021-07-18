@@ -38,19 +38,9 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemiesCount = 3;
-        const yPos = [62.5, 175, 287.5];
-        const gameBoardElement = this.gameBoard.element;
-
-        for (let i = 0; i < enemiesCount; i += 1) {
-            const enemy = new Enemy(0, yPos[i]);
-            this.enemies.push(enemy);
-        }
-
-        this.enemies.forEach((enemy) => {
-            gameBoardElement.appendChild(enemy.element);
-            enemy.draw();
-        });
+        const enemy = new Enemy(0, 150);
+        this.gameBoard.element.appendChild(enemy.element);
+        this.enemies.push(enemy);
     }
 
     deleteEnemy(enemyToDelete) {
