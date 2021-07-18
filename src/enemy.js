@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 // enemy class
 class Enemy {
     constructor(xPos, yPos) {
@@ -17,8 +16,12 @@ class Enemy {
         this.element.style.height = `${this.height}px`;
     }
 
-    update() {
-        // update enemy position
+    update(game) {
+        if (this.hasHitCastle(game)) {
+            this.delete(game);
+            return;
+        }
+
         this.pos.x += this.speed;
     }
 
@@ -27,8 +30,15 @@ class Enemy {
         this.element.style.transform = `translate(${this.pos.x}px, ${this.pos.y}px)`;
     }
 
-    delete() {
-        // enemy died
+    delete(game) {
+        // remove enemy from game-board
+        this.element.remove();
+        // remove enemy from enemies array
+        game.deleteEnemy(this);
+    }
+
+    hasHitCastle(game) {
+        return this.pos.x >= game.fieldWidth - this.width;
     }
 }
 
