@@ -17,20 +17,10 @@ class Game {
         this.spawnEnemy = this.spawnEnemy.bind(this);
 
         this.spawnTimer = new Timer(2000, this.spawnEnemy);
-
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') {
-                this.spawnTimer.pause();
-            }
-        });
-    }
-
-    start() {
-        this.spawnTimer.start();
     }
 
     update(deltaTime) {
-        this.spawnTimer.tick();
+        this.spawnTimer.tick(deltaTime);
         this.enemies.forEach((enemy) => enemy.update(this, deltaTime));
     }
 
