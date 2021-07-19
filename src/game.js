@@ -1,6 +1,7 @@
 import gameBoard from './gameBoard';
 import castle from './castle';
 import Enemy from './enemy';
+import Timer from './timer';
 
 class Game {
     constructor() {
@@ -13,13 +14,23 @@ class Game {
         // bind methods 'this' to Game class
         this.update = this.update.bind(this);
         this.draw = this.draw.bind(this);
+        this.spawnEnemy = this.spawnEnemy.bind(this);
+
+        this.spawnTimer = new Timer(2000, this.spawnEnemy);
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                this.spawnTimer.pause();
+            }
+        });
     }
 
     start() {
-        this.spawnEnemy();
+        this.spawnTimer.start();
     }
 
     update(deltaTime) {
+        this.spawnTimer.tick();
         this.enemies.forEach((enemy) => enemy.update(this, deltaTime));
     }
 
