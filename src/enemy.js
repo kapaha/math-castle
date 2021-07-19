@@ -5,7 +5,7 @@ class Enemy {
         this.pos = { x: xPos, y: yPos };
         this.width = 50;
         this.height = 50;
-        this.speed = 1;
+        this.speed = 60; // px per second
         this.selected = false; // default false (not selected)
         this.question = '';
         this.answer = '';
@@ -16,13 +16,15 @@ class Enemy {
         this.element.style.height = `${this.height}px`;
     }
 
-    update(game) {
+    update(game, deltaTime) {
         if (this.hasHitCastle(game)) {
             this.delete(game);
             return;
         }
 
-        this.pos.x += this.speed;
+        // multiply speed by deltaTime in seconds for consistent movement across
+        // different framerates
+        this.pos.x += this.speed * (deltaTime / 1000);
     }
 
     draw() {

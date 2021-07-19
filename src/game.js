@@ -1,6 +1,7 @@
 import gameBoard from './gameBoard';
 import castle from './castle';
 import Enemy from './enemy';
+import Timer from './timer';
 
 class Game {
     constructor() {
@@ -10,27 +11,27 @@ class Game {
         this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
 
-        // bind gameLoop 'this' to Game class
-        this.gameLoop = this.gameLoop.bind(this);
+        // bind methods 'this' to Game class
+        this.update = this.update.bind(this);
+        this.draw = this.draw.bind(this);
+        this.spawnEnemy = this.spawnEnemy.bind(this);
+
+        this.spawnTimer = new Timer(2000, this.spawnEnemy);
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                this.spawnTimer.pause();
+            }
+        });
     }
 
     start() {
-        this.spawnEnemy();
-
-        // start the game loop
-        requestAnimationFrame(this.gameLoop);
+        this.spawnTimer.start();
     }
 
-    gameLoop() {
-        this.update();
-        this.draw();
-
-        // call gameLoop before every browser repaint
-        requestAnimationFrame(this.gameLoop);
-    }
-
-    update() {
-        this.enemies.forEach((enemy) => enemy.update(this));
+    update(deltaTime) {
+        this.spawnTimer.tick();
+        this.enemies.forEach((enemy) => enemy.update(this, deltaTime));
     }
 
     draw() {
@@ -38,19 +39,9 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemiesCount = 3;
-        const yPos = [62.5, 175, 287.5];
-        const gameBoardElement = this.gameBoard.element;
-
-        for (let i = 0; i < enemiesCount; i += 1) {
-            const enemy = new Enemy(0, yPos[i]);
-            this.enemies.push(enemy);
-        }
-
-        this.enemies.forEach((enemy) => {
-            gameBoardElement.appendChild(enemy.element);
-            enemy.draw();
-        });
+        const enemy = new Enemy(0, 150);
+        this.gameBoard.element.appendChild(enemy.element);
+        this.enemies.push(enemy);
     }
 
     deleteEnemy(enemyToDelete) {
