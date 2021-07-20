@@ -2,14 +2,22 @@
     --game-board-height: 400px;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 #game-board {
     margin: auto;
     background-color: rgb(69, 115, 136);
     height: var(--game-board-height);
     width: 900px;
     position: relative;
+    margin-top: 100px;
 }
 
+/* castle styles */
 #castle {
     width: 200px;
     height: var(--game-board-height);
@@ -17,6 +25,14 @@
     top: 0;
     right: 0;
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#castle-lives {
+    color: white;
+    font-size: 4rem;
 }
 
 /* enemy style */
