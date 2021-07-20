@@ -2,7 +2,7 @@ const castle = {
     element: document.getElementById('castle'),
     height: 400,
     width: 200,
-    health: null,
+    lives: 3,
 };
 
 export default castle;
