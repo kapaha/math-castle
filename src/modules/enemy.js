@@ -19,6 +19,7 @@ class Enemy {
     update(game, deltaTime) {
         if (this.hasHitCastle(game)) {
             this.delete(game);
+            game.castle.damage(1);
             return;
         }
 
