@@ -1,14 +1,13 @@
 // enemy class
 class Enemy {
-    constructor(xPos, yPos) {
+    constructor(xPos, yPos, question) {
         this.element = document.createElement('div');
         this.pos = { x: xPos, y: yPos };
         this.width = 50;
         this.height = 50;
         this.speed = 60; // px per second
         this.selected = false; // default false (not selected)
-        this.question = '';
-        this.answer = '';
+        this.question = question;
 
         // setting some enemy css
         this.element.classList.add('enemy');

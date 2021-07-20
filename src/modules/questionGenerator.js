@@ -50,11 +50,11 @@ const answerQuestion = (question) => {
 
 const questionGenerator = (difficulty) => {
     const operator = operatorSelector(difficulty);
-    const question = `${questionNumberGenerator()} ${operator} ${questionNumberGenerator()}`;
-    const answer = answerQuestion(question);
+    const questionText = `${questionNumberGenerator()} ${operator} ${questionNumberGenerator()}`;
+    const answer = answerQuestion(questionText);
 
     return {
-        question,
+        text: questionText,
         answer,
     };
 };
