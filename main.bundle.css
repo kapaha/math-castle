@@ -42,5 +42,11 @@
     border-radius: 50%;
 }
 
+/* enemy selected */
+.selected {
+    background-color: chocolate;
+    opacity: 70%;
+}
+
 
 /*# sourceMappingURL=main.bundle.css.map*/
