@@ -28,7 +28,7 @@ const operatorSelector = (difficulty) =>
     operatorDifficulty[difficulty][indexOperatorGenerator(difficulty)];
 
 const questionNumberGenerator = (difficulty) =>
-    wholeNumberGenerator(generateDifficulty(difficulty));
+    wholeNumberGenerator(generateDifficulty(difficulty)) + 1;
 
 const answerQuestion = (question) => {
     const questionArr = question.split(' ');
