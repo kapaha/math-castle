@@ -1,9 +1,5 @@
-// enemy class
-// imported as spawnedEnemies to prevent name conflict
-import { game as spawnedEnemies } from '../index';
-
 class Enemy {
-    constructor(xPos, yPos) {
+    constructor(xPos, yPos, game) {
         this.element = document.createElement('div');
         this.pos = { x: xPos, y: yPos };
         this.width = 50;
@@ -12,6 +8,7 @@ class Enemy {
         this.selected = false; // default false (not selected)
         this.question = '';
         this.answer = '';
+        this.game = game;
 
         // setting some enemy css
         this.element.classList.add('enemy');
@@ -20,18 +17,26 @@ class Enemy {
 
         // set enemy selected
         this.element.addEventListener('click', () => {
-            // remove all selected class and attribute in order to make only one selection
-            const enemiesArr = spawnedEnemies.enemies;
-            enemiesArr.forEach((enemy) => {
-                enemy.selected = false;
-                enemy.element.classList.remove('selected');
-            });
-            // select clicked enemy
-            this.selected = true;
-            if (this.selected) {
-                this.element.classList.add('selected');
-            }
+            this.unSelect();
+            this.select();
         });
+    }
+
+    select() {
+        // select clicked enemy
+        this.selected = true;
+        if (this.selected) {
+            this.element.classList.add('selected');
+        }
+    }
+
+    unSelect() {
+        // remove all selected class and attribute in order to make only one selection
+        const enemiesArr = this.game.enemies;
+        const selectedEnemy = enemiesArr.find((enemy) => enemy.selected);
+        if (selectedEnemy === undefined) return;
+        selectedEnemy.selected = false;
+        selectedEnemy.element.classList.remove('selected');
     }
 
     update(game, deltaTime) {

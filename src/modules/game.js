@@ -29,7 +29,7 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemy = new Enemy(0, 150);
+        const enemy = new Enemy(0, 150, this);
         this.gameBoard.element.appendChild(enemy.element);
         this.enemies.push(enemy);
     }
