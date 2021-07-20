@@ -2,6 +2,7 @@ import gameBoard from './gameBoard';
 import castle from './castle';
 import Enemy from './enemy';
 import Timer from './timer';
+import questionGenerator from './questionGenerator';
 
 const GAMESTATE = {
     MENU: 0,
@@ -44,7 +45,7 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemy = new Enemy(0, 150, this);
+        const enemy = new Enemy(0, 150, this, questionGenerator('easy'));
         this.gameBoard.element.appendChild(enemy.element);
         this.enemies.push(enemy);
     }
