@@ -1,6 +1,5 @@
-// enemy class
 class Enemy {
-    constructor(xPos, yPos) {
+    constructor(xPos, yPos, game) {
         this.element = document.createElement('div');
         this.pos = { x: xPos, y: yPos };
         this.width = 50;
@@ -9,11 +8,35 @@ class Enemy {
         this.selected = false; // default false (not selected)
         this.question = '';
         this.answer = '';
+        this.game = game;
 
         // setting some enemy css
         this.element.classList.add('enemy');
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
+
+        // set enemy selected
+        this.element.addEventListener('click', () => {
+            this.unSelect();
+            this.select();
+        });
+    }
+
+    select() {
+        // select clicked enemy
+        this.selected = true;
+        if (this.selected) {
+            this.element.classList.add('selected');
+        }
+    }
+
+    unSelect() {
+        // remove all selected class and attribute in order to make only one selection
+        const enemiesArr = this.game.enemies;
+        const selectedEnemy = enemiesArr.find((enemy) => enemy.selected);
+        if (selectedEnemy === undefined) return;
+        selectedEnemy.selected = false;
+        selectedEnemy.element.classList.remove('selected');
     }
 
     update(game, deltaTime) {
