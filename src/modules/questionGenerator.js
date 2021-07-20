@@ -33,7 +33,12 @@ const questionNumberGenerator = (difficulty) =>
 const questionGenerator = (difficulty) => {
     const operator = operatorSelector(difficulty);
     const question = `${questionNumberGenerator()} ${operator} ${questionNumberGenerator()}`;
-    return question;
+    const answer = answerQuestion(question);
+
+    return {
+        question,
+        answer,
+    };
 };
 
 const answerQuestion = (question) => {
@@ -53,3 +58,5 @@ const answerQuestion = (question) => {
     }
     return answer;
 };
+
+export default questionGenerator;
