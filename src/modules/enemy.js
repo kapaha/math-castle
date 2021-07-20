@@ -1,4 +1,7 @@
 // enemy class
+// imported as spawnedEnemies to prevent name conflict
+import { game as spawnedEnemies } from '../index';
+
 class Enemy {
     constructor(xPos, yPos) {
         this.element = document.createElement('div');
@@ -14,6 +17,21 @@ class Enemy {
         this.element.classList.add('enemy');
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
+
+        // set enemy selected
+        this.element.addEventListener('click', () => {
+            // remove all selected class and attribute in order to make only one selection
+            const enemiesArr = spawnedEnemies.enemies;
+            enemiesArr.forEach((enemy) => {
+                enemy.selected = false;
+                enemy.element.classList.remove('selected');
+            });
+            // select clicked enemy
+            this.selected = true;
+            if (this.selected) {
+                this.element.classList.add('selected');
+            }
+        });
     }
 
     update(game, deltaTime) {

@@ -25,3 +25,9 @@
     background-color: red;
     border-radius: 50%;
 }
+
+/* enemy selected */
+.selected {
+    background-color: chocolate;
+    opacity: 70%;
+}
