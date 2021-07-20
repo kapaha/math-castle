@@ -30,17 +30,6 @@ const operatorSelector = (difficulty) =>
 const questionNumberGenerator = (difficulty) =>
     wholeNumberGenerator(generateDifficulty(difficulty));
 
-const questionGenerator = (difficulty) => {
-    const operator = operatorSelector(difficulty);
-    const question = `${questionNumberGenerator()} ${operator} ${questionNumberGenerator()}`;
-    const answer = answerQuestion(question);
-
-    return {
-        question,
-        answer,
-    };
-};
-
 const answerQuestion = (question) => {
     const questionArr = question.split(' ');
     const num1 = Number(questionArr[0]);
@@ -57,6 +46,17 @@ const answerQuestion = (question) => {
         answer = num1 / num2;
     }
     return answer;
+};
+
+const questionGenerator = (difficulty) => {
+    const operator = operatorSelector(difficulty);
+    const question = `${questionNumberGenerator()} ${operator} ${questionNumberGenerator()}`;
+    const answer = answerQuestion(question);
+
+    return {
+        question,
+        answer,
+    };
 };
 
 export default questionGenerator;
