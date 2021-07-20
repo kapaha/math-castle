@@ -2,6 +2,12 @@
     --game-board-height: 400px;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 #game-board {
     margin: auto;
     background-color: rgb(69, 115, 136);
