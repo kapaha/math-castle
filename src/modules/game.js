@@ -45,8 +45,8 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemy = new Enemy(0, 150, this, questionGenerator('easy'));
-        this.gameBoard.element.appendChild(enemy.element);
+        const enemy = new Enemy(0, 150, this, questionGenerator('insane'));
+        this.gameBoard.element.appendChild(enemy.elements.enemy);
         this.enemies.push(enemy);
     }
 

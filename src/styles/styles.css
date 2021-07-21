@@ -3,6 +3,7 @@
 }
 
 * {
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -42,8 +43,23 @@
     border-radius: 50%;
 }
 
-/* enemy selected */
-.selected {
-    background-color: chocolate;
-    opacity: 70%;
+.enemy-question {
+    font-size: 1.2rem;
+
+    background-color: white;
+    border: 3px solid gray;
+    border-radius: 0.5em;
+
+    width: max-content;
+    padding: 0.25em 0.5em;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: calc(100% + 5px);
+}
+
+.enemy.selected .enemy-question {
+    border-color: black;
+    font-size: 1.5rem;
 }

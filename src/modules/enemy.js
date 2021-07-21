@@ -1,6 +1,10 @@
 class Enemy {
     constructor(xPos, yPos, game, question) {
-        this.element = document.createElement('div');
+        this.elements = {
+            enemy: document.createElement('div'),
+            question: document.createElement('div'),
+        };
+
         this.pos = { x: xPos, y: yPos };
         this.width = 50;
         this.height = 50;
@@ -10,12 +14,17 @@ class Enemy {
         this.game = game;
 
         // setting some enemy css
-        this.element.classList.add('enemy');
-        this.element.style.width = `${this.width}px`;
-        this.element.style.height = `${this.height}px`;
+        this.elements.enemy.classList.add('enemy');
+        this.elements.enemy.style.width = `${this.width}px`;
+        this.elements.enemy.style.height = `${this.height}px`;
+
+        // question element styles
+        this.elements.question.classList.add('enemy-question');
+        this.elements.question.textContent = this.question.text;
+        this.elements.enemy.appendChild(this.elements.question);
 
         // set enemy selected
-        this.element.addEventListener('click', () => {
+        this.elements.enemy.addEventListener('click', () => {
             this.unSelect();
             this.select();
         });
@@ -25,7 +34,7 @@ class Enemy {
         // select clicked enemy
         this.selected = true;
         if (this.selected) {
-            this.element.classList.add('selected');
+            this.elements.enemy.classList.add('selected');
         }
     }
 
@@ -35,7 +44,7 @@ class Enemy {
         const selectedEnemy = enemiesArr.find((enemy) => enemy.selected);
         if (selectedEnemy === undefined) return;
         selectedEnemy.selected = false;
-        selectedEnemy.element.classList.remove('selected');
+        selectedEnemy.elements.enemy.classList.remove('selected');
     }
 
     update(game, deltaTime) {
@@ -52,12 +61,12 @@ class Enemy {
 
     draw() {
         // draw the enemy to different position
-        this.element.style.transform = `translate(${this.pos.x}px, ${this.pos.y}px)`;
+        this.elements.enemy.style.transform = `translate(${this.pos.x}px, ${this.pos.y}px)`;
     }
 
     delete(game) {
         // remove enemy from game-board
-        this.element.remove();
+        this.elements.enemy.remove();
         // remove enemy from enemies array
         game.deleteEnemy(this);
     }
