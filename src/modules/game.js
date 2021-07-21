@@ -10,6 +10,12 @@ const GAMESTATE = {
     GAMEOVER: 2,
 };
 
+const POSITION = {
+    firstLane: 50,
+    secondLane: 165,
+    thirdLane: 280,
+};
+
 class Game {
     constructor() {
         this.gameBoard = gameBoard;
@@ -48,9 +54,21 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemy = new Enemy(0, 150, this, questionGenerator('easy'));
+        const enemy = new Enemy(
+            0,
+            this.randomLane(),
+            this,
+            questionGenerator('insane')
+        );
         this.gameBoard.element.appendChild(enemy.elements.enemy);
         this.enemies.push(enemy);
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    randomLane() {
+        // randomly choose an object keys in the POSITION object
+        const keys = Object.keys(POSITION);
+        return POSITION[keys[Math.floor(Math.random() * keys.length)]];
     }
 
     deleteEnemy(enemyToDelete) {
