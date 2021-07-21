@@ -20,6 +20,8 @@ class Game {
     constructor() {
         this.gameBoard = gameBoard;
         this.castle = castle;
+        this.answerForm = document.querySelector('.answer-form');
+        this.answerInput = document.querySelector('#answer-input');
         // width of area enemy can move in
         this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
@@ -29,13 +31,14 @@ class Game {
         this.update = this.update.bind(this);
         this.draw = this.draw.bind(this);
         this.spawnEnemy = this.spawnEnemy.bind(this);
+        this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
 
         this.spawnTimer = new Timer(2000, this.spawnEnemy);
     }
 
     start() {
         this.castle.setup(this);
-
+        this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
         this.gameState = GAMESTATE.RUNNING;
     }
 
@@ -74,6 +77,18 @@ class Game {
 
     gameOver() {
         this.gameState = GAMESTATE.GAMEOVER;
+    }
+
+    handleAnswerSubmit(event) {
+        event.preventDefault();
+
+        const selectedEnemy = this.enemies.find((enemy) => enemy.selected);
+        if (!selectedEnemy) return;
+
+        const correctAnswer = selectedEnemy.question.answer.toString();
+        const userAnswer = this.answerInput.value;
+
+        if (userAnswer === correctAnswer) selectedEnemy.delete(this);
     }
 }
 
