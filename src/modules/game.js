@@ -30,7 +30,7 @@ class Game {
         this.draw = this.draw.bind(this);
         this.spawnEnemy = this.spawnEnemy.bind(this);
 
-        this.spawnTimer = new Timer(4000, this.spawnEnemy);
+        this.spawnTimer = new Timer(2000, this.spawnEnemy);
     }
 
     start() {
@@ -65,8 +65,7 @@ class Game {
     randomLane() {
         // randomly choose an object keys in the POSITION object
         const keys = Object.keys(POSITION);
-        // eslint-disable-next-line no-bitwise
-        return POSITION[keys[(keys.length * Math.random()) << 0]];
+        return POSITION[keys[Math.floor(Math.random() * keys.length)]];
     }
 
     deleteEnemy(enemyToDelete) {
