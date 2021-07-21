@@ -10,6 +10,12 @@ const GAMESTATE = {
     GAMEOVER: 2,
 };
 
+const POSITION = {
+    firstLane: 50,
+    secondLane: 165,
+    thirdLane: 280,
+};
+
 class Game {
     constructor() {
         this.gameBoard = gameBoard;
@@ -24,7 +30,7 @@ class Game {
         this.draw = this.draw.bind(this);
         this.spawnEnemy = this.spawnEnemy.bind(this);
 
-        this.spawnTimer = new Timer(2000, this.spawnEnemy);
+        this.spawnTimer = new Timer(4000, this.spawnEnemy);
     }
 
     start() {
@@ -45,9 +51,22 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemy = new Enemy(0, 150, this, questionGenerator('insane'));
+        const enemy = new Enemy(
+            0,
+            this.randomLane(),
+            this,
+            questionGenerator('insane')
+        );
         this.gameBoard.element.appendChild(enemy.elements.enemy);
         this.enemies.push(enemy);
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    randomLane() {
+        // randomly choose an object keys in the POSITION object
+        const keys = Object.keys(POSITION);
+        // eslint-disable-next-line no-bitwise
+        return POSITION[keys[(keys.length * Math.random()) << 0]];
     }
 
     deleteEnemy(enemyToDelete) {
