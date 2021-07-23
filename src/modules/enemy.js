@@ -27,6 +27,7 @@ class Enemy {
         this.elements.enemy.addEventListener('click', () => {
             this.unSelect();
             this.select();
+            this.game.answerInput.focus();
         });
     }
 

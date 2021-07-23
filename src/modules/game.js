@@ -89,6 +89,8 @@ class Game {
         const userAnswer = this.answerInput.value;
 
         if (userAnswer === correctAnswer) selectedEnemy.delete(this);
+
+        this.answerInput.value = '';
     }
 }
 
