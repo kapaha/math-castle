@@ -48,6 +48,11 @@ const answerQuestion = (question) => {
     return answer;
 };
 
+const formatter = new Intl.NumberFormat('en-GB', {
+    maximumFractionDigits: 2,
+    useGrouping: false,
+});
+
 const questionGenerator = (difficulty) => {
     const operator = operatorSelector(difficulty);
     const questionText = `${questionNumberGenerator(
@@ -57,7 +62,7 @@ const questionGenerator = (difficulty) => {
 
     return {
         text: questionText,
-        answer,
+        answer: formatter.format(answer),
     };
 };
 

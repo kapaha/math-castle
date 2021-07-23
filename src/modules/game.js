@@ -85,7 +85,7 @@ class Game {
         const selectedEnemy = this.enemies.find((enemy) => enemy.selected);
         if (!selectedEnemy) return;
 
-        const correctAnswer = selectedEnemy.question.answer.toString();
+        const correctAnswer = selectedEnemy.question.answer;
         const userAnswer = this.answerInput.value;
 
         if (userAnswer === correctAnswer) selectedEnemy.delete(this);
