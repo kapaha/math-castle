@@ -16,7 +16,7 @@ const POSITION = {
     thirdLane: 280,
 };
 
-let speed = 40;
+let enemySpeed = 40;
 
 class Game {
     constructor() {
@@ -62,9 +62,9 @@ class Game {
             this.randomLane(),
             this,
             questionGenerator('insane'),
-            speed
+            enemySpeed
         );
-        speed += 3;
+        enemySpeed += 3;
         this.gameBoard.element.appendChild(enemy.elements.enemy);
         this.enemies.push(enemy);
     }
