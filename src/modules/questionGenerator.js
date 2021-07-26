@@ -1,12 +1,15 @@
+// \u2A09 is the unicode symbol for multiplication and \u00F7 for division in Javascript.
+
 const operatorDifficulty = {
     easy: ['+', '-'],
-    medium: ['+', '-', '*'],
-    hard: ['+', '-', '*'],
-    insane: ['+', '-', '*', '/'],
+    medium: ['+', '-', '\u2A09'],
+    hard: ['+', '-', '\u2A09'],
+    insane: ['+', '-', '\u2A09', '\u00F7'],
 };
 
 const wholeNumberGenerator = (number) => Math.floor(Math.random() * number);
 
+// Change difficulty here as this is the factor of multiplication that determines range of numbers.
 const generateDifficulty = (difficulty) => {
     switch (difficulty) {
         case 'easy':
@@ -21,6 +24,7 @@ const generateDifficulty = (difficulty) => {
             return 5;
     }
 };
+
 const indexOperatorGenerator = (difficulty) =>
     wholeNumberGenerator(operatorDifficulty[difficulty].length);
 
@@ -40,7 +44,7 @@ const answerQuestion = (question) => {
         answer = num1 + num2;
     } else if (operator === '-') {
         answer = num1 - num2;
-    } else if (operator === '*') {
+    } else if (operator === '\u2A09') {
         answer = num1 * num2;
     } else {
         answer = num1 / num2;
@@ -50,9 +54,45 @@ const answerQuestion = (question) => {
 
 const questionGenerator = (difficulty) => {
     const operator = operatorSelector(difficulty);
-    const questionText = `${questionNumberGenerator(
-        difficulty
-    )} ${operator} ${questionNumberGenerator(difficulty)}`;
+    let number1 = questionNumberGenerator(difficulty);
+    let number2 = questionNumberGenerator(difficulty);
+    // Functions that will determine question difficulty
+    while (operator === '\u00F7'){
+        if (number1 % number2 !== 0) {
+            number1 = questionNumberGenerator(difficulty);
+            number2 = questionNumberGenerator(difficulty);
+        } else {
+            break;
+        }
+    }
+    while (operator === '-'){
+        if (number1 - number2 < 0) {
+            number1 = questionNumberGenerator(difficulty);
+            number2 = questionNumberGenerator(difficulty);
+        } else {
+            break;
+        }
+    }
+
+    while (operator === '\u2A09'){
+        if (number1 * number2 > 150) {
+            number1 = questionNumberGenerator(difficulty);
+            number2 = questionNumberGenerator(difficulty);
+        } else {
+            break;
+        }
+    }
+
+    while (operator === '+'){
+        if (number1 + number2 > 150) {
+            number1 = questionNumberGenerator(difficulty);
+            number2 = questionNumberGenerator(difficulty);
+        } else {
+            break;
+        }
+    }
+
+    const questionText = `${number1} ${operator} ${number2}`;
     const answer = answerQuestion(questionText);
 
     return {
