@@ -1,5 +1,5 @@
 class Enemy {
-    constructor(xPos, yPos, game, question) {
+    constructor(xPos, yPos, game, question, speed) {
         this.elements = {
             enemy: document.createElement('div'),
             question: document.createElement('div'),
@@ -8,7 +8,7 @@ class Enemy {
         this.pos = { x: xPos, y: yPos };
         this.width = 50;
         this.height = 50;
-        this.speed = 60; // px per second
+        this.speed = speed; // px per second
         this.selected = false; // default false (not selected)
         this.question = question;
         this.game = game;
