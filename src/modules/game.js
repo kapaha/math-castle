@@ -16,6 +16,8 @@ const POSITION = {
     thirdLane: 280,
 };
 
+let enemySpeed = 40;
+
 class Game {
     constructor() {
         this.gameBoard = gameBoard;
@@ -33,7 +35,8 @@ class Game {
         this.spawnEnemy = this.spawnEnemy.bind(this);
         this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
 
-        this.spawnTimer = new Timer(2000, this.spawnEnemy);
+        // spawn enemy every 2.5 seconds
+        this.spawnTimer = new Timer(2500, this.spawnEnemy);
     }
 
     start() {
@@ -58,8 +61,10 @@ class Game {
             0,
             this.randomLane(),
             this,
-            questionGenerator('insane')
+            questionGenerator('insane'),
+            enemySpeed
         );
+        enemySpeed += 3;
         this.gameBoard.element.appendChild(enemy.elements.enemy);
         this.enemies.push(enemy);
     }
