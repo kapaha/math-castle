@@ -9,6 +9,14 @@
     box-sizing: border-box;
 }
 
+#game-timer {
+    font-size: 4rem;
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translate(-50%, 0);
+}
+
 #game-board {
     margin: auto;
     background-color: rgb(69, 115, 136);
