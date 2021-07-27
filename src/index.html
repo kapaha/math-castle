@@ -14,30 +14,39 @@
         <title>Castle Game</title>
     </head>
     <body>
-        <div id="start-page">
-            <h1 id="game-title">Math Cast<span id="le">le</span></h1>
-            <div id="instructions">
-                <h2 class="instructions-header">Instructions:</h2>
-                <p class="instructions-paragraph">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magnam nulla explicabo magni sequi ipsam ad atque? Amet
-                    vitae minus non optio consequatur iste. Molestiae dolore
-                    quasi saepe, officiis necessitatibus modi!
-                </p>
-            </div>
-            <button class="button start-button">Play</button>
-        </div>
-
-        <div id="game">
-            <div id="game-board">
-                <div id="castle">
-                    <p id="castle-lives"></p>
+        <div id="container">
+            <div id="start-page">
+                <h1 id="game-title" class="title">
+                    Math Cast<span id="le">le</span>
+                </h1>
+                <div id="instructions">
+                    <h2 class="instructions-header">Instructions:</h2>
+                    <p class="instructions-paragraph">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Magnam nulla explicabo magni sequi ipsam ad atque? Amet
+                        vitae minus non optio consequatur iste. Molestiae dolore
+                        quasi saepe, officiis necessitatibus modi!
+                    </p>
                 </div>
+                <button class="button start-button">Play</button>
             </div>
-            <form class="answer-form">
-                <label for="answer-input">Enter Answer</label>
-                <input type="text" id="answer-input" />
-            </form>
+
+            <div id="game-page">
+                <div id="game-board">
+                    <div id="castle">
+                        <p id="castle-lives"></p>
+                    </div>
+                </div>
+                <form class="answer-form">
+                    <label for="answer-input">Enter Answer</label>
+                    <input type="text" id="answer-input" />
+                </form>
+            </div>
+
+            <div id="game-over-page">
+                <h1 id="game-over-title" class="title">Game Over</h1>
+                <button class="button restart-button">Restart</button>
+            </div>
         </div>
     </body>
 </html>
