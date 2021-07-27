@@ -34,9 +34,13 @@ class Game {
         this.draw = this.draw.bind(this);
         this.spawnEnemy = this.spawnEnemy.bind(this);
         this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
+        this.gameOver = this.gameOver.bind(this);
 
         // spawn enemy every 2.5 seconds
         this.spawnTimer = new Timer(2500, this.spawnEnemy);
+
+        // end game after 30000 ms (5 minutes)
+        this.countDownTimer = new Timer(30000, this.gameOver);
     }
 
     start() {
@@ -49,6 +53,7 @@ class Game {
         if (this.gameState !== GAMESTATE.RUNNING) return;
 
         this.spawnTimer.tick(deltaTime);
+        this.countDownTimer.tick(deltaTime);
         this.enemies.forEach((enemy) => enemy.update(this, deltaTime));
     }
 
