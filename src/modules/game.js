@@ -43,8 +43,10 @@ class Game {
         this.castle.setup(this);
         this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
         this.gameState = GAMESTATE.RUNNING;
+        // hide start page
         const startPage = document.getElementById('start-page');
-        startPage.style.visibility = 'hidden';
+        startPage.style.display = 'none';
+        startPage.style.zIndex = -1;
     }
 
     update(deltaTime) {
@@ -84,6 +86,10 @@ class Game {
 
     gameOver() {
         this.gameState = GAMESTATE.GAMEOVER;
+        const gamePage = document.getElementById('game-page');
+        gamePage.style.display = 'none';
+        const gameOverPage = document.getElementById('game-over-page');
+        gameOverPage.style.visibility = 'visible';
     }
 
     handleAnswerSubmit(event) {

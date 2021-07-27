@@ -48,7 +48,7 @@
     display: flex;
     flex-direction: column;
     top: 0;
-    z-index: -1;
+    z-index: 0;
 }
 
 #game-board {
@@ -130,7 +130,7 @@
 /* ********  GAME-OVE-PAGE  ******** */
 
 #game-over-page {
-    /* display: none; */
+    visibility: hidden;
 }
 
 #game-over-title {
@@ -150,6 +150,7 @@
     align-items: center;
     justify-content: center;
     opacity: 90%;
+    z-index: 1;
 }
 
 .title {
