@@ -129,6 +129,10 @@
 
 /* ********  GAME-OVE-PAGE  ******** */
 
+#game-over-page {
+    /* display: none; */
+}
+
 #game-over-title {
     margin-bottom: 1.5rem;
 }

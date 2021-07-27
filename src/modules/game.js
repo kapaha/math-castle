@@ -43,6 +43,8 @@ class Game {
         this.castle.setup(this);
         this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
         this.gameState = GAMESTATE.RUNNING;
+        const startPage = document.getElementById('start-page');
+        startPage.style.visibility = 'hidden';
     }
 
     update(deltaTime) {
