@@ -16,8 +16,20 @@ function Timer(duration, onFinish, { autoRestart = true } = {}) {
         if (timeRemaining === 0) handleComplete();
     }
 
+    // converts time in ms to mm:ss format
+    function getHumanTimeRemaining() {
+        const seconds = Math.ceil(timeRemaining / 1000) % 60;
+        const minutes = Math.floor(Math.ceil(timeRemaining / 1000) / 60);
+
+        const formatedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+        return `${formattedMinutes}:${formatedSeconds}`;
+    }
+
     return Object.freeze({
         tick,
+        getHumanTimeRemaining,
     });
 }
 
