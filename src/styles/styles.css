@@ -127,10 +127,10 @@
     padding: 0.25em 0.5em;
 }
 
-/* ********  GAME-OVE-PAGE  ******** */
+/* ********  GAME-OVER-PAGE  ******** */
 
 #game-over-page {
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 #game-over-title {

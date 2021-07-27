@@ -17,6 +17,9 @@ const POSITION = {
 };
 
 let enemySpeed = 40;
+const startPage = document.getElementById('start-page');
+const gamePage = document.getElementById('game-page');
+const gameOverPage = document.getElementById('game-over-page');
 
 class Game {
     constructor() {
@@ -40,13 +43,14 @@ class Game {
     }
 
     start() {
-        this.castle.setup(this);
+        this.castle.setup(this, 3);
         this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
         this.gameState = GAMESTATE.RUNNING;
         // hide start page
-        const startPage = document.getElementById('start-page');
         startPage.style.display = 'none';
         startPage.style.zIndex = -1;
+        gameOverPage.style.display = 'none';
+        gamePage.style.display = 'flex';
     }
 
     update(deltaTime) {
@@ -86,10 +90,13 @@ class Game {
 
     gameOver() {
         this.gameState = GAMESTATE.GAMEOVER;
-        const gamePage = document.getElementById('game-page');
         gamePage.style.display = 'none';
-        const gameOverPage = document.getElementById('game-over-page');
-        gameOverPage.style.visibility = 'visible';
+        gameOverPage.style.display = 'flex';
+        this.enemies.forEach((enemy) => {
+            enemy.delete();
+        });
+        this.answerInput.value = '';
+        enemySpeed = 40;
     }
 
     handleAnswerSubmit(event) {
