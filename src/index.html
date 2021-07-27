@@ -8,20 +8,36 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Merriweather:wght@400;900&display=swap"
             rel="stylesheet"
         />
         <title>Castle Game</title>
     </head>
     <body>
-        <div id="game-board">
-            <div id="castle">
-                <p id="castle-lives"></p>
+        <div id="start-page">
+            <h1 id="game-title">Math Cast<span id="le">le</span></h1>
+            <div id="instructions">
+                <h2 class="instructions-header">Instructions:</h2>
+                <p class="instructions-paragraph">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Magnam nulla explicabo magni sequi ipsam ad atque? Amet
+                    vitae minus non optio consequatur iste. Molestiae dolore
+                    quasi saepe, officiis necessitatibus modi!
+                </p>
             </div>
+            <button class="button start-button">Play</button>
         </div>
-        <form class="answer-form">
-            <label for="answer-input">Enter Answer</label>
-            <input type="text" id="answer-input" />
-        </form>
+
+        <div id="game">
+            <div id="game-board">
+                <div id="castle">
+                    <p id="castle-lives"></p>
+                </div>
+            </div>
+            <form class="answer-form">
+                <label for="answer-input">Enter Answer</label>
+                <input type="text" id="answer-input" />
+            </form>
+        </div>
     </body>
 </html>

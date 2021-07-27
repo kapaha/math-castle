@@ -9,7 +9,76 @@
     box-sizing: border-box;
 }
 
+/* ********  START PAGE  ******** */
+
+#start-page {
+    height: 100vh;
+    background-color: #003638;
+    color: #f3f2c9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 40%;
+}
+
+#game-title {
+    font-family: 'Merriweather', serif;
+    font-size: 3.5rem;
+    padding: 3rem;
+}
+
+#le {
+    font-family: 'Black Ops One', cursive;
+    font-size: 4rem;
+}
+
+#instructions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.instructions-header {
+    font-family: 'Merriweather', serif;
+    padding-bottom: 1rem;
+}
+
+.instructions-paragraph {
+    width: 60%;
+    border: 3px solid #f3f2c9;
+    padding: 4rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.start-button {
+    margin-top: 2rem;
+    box-shadow: inset 0px 1px 3px 0px #91b8b3;
+    background: linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+    background-color: #768d87;
+    border-radius: 5px;
+    border: 1px solid #566963;
+    display: inline-block;
+    cursor: pointer;
+    color: #f3f2c9;
+    font-family: 'Black Ops One', cursive;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 11px 23px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #2b665e;
+}
+
+.start-button:hover {
+    background: linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+    background-color: #6c7c7c;
+}
+/* ********  GAME  ******** */
+
 #game-board {
+    background-image: url('../Game_board1.jpg');
+    background-size: contain;
     margin: auto;
     background-color: rgb(69, 115, 136);
     height: var(--game-board-height);
