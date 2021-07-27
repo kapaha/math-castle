@@ -84,6 +84,16 @@ class Game {
         this.gameState = GAMESTATE.GAMEOVER;
     }
 
+    initialiseTimers() {
+        // spawn enemy every 2.5 seconds
+        const spawnTimer = Timer(2500, this.spawnEnemy);
+
+        // end game after 300000 ms (5 minutes)
+        const countDownTimer = Timer(300000, this.gameOver);
+
+        this.timers.push(spawnTimer, countDownTimer);
+    }
+
     handleAnswerSubmit(event) {
         event.preventDefault();
 

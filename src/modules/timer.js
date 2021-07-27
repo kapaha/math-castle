@@ -1,22 +1,24 @@
-class Timer {
-    constructor(duration, onFinish) {
-        this.duration = duration;
-        this.onFinish = onFinish;
-        this.elapsed = 0;
+function Timer(duration, onFinish, { autoRestart = true } = {}) {
+    let timeRemaining = duration;
+
+    function restart() {
+        timeRemaining = duration;
     }
 
-    tick(deltaTime) {
-        this.elapsed += deltaTime;
-
-        if (this.elapsed > this.duration) {
-            this.onFinish();
-            this.reset();
-        }
+    function handleComplete() {
+        onFinish();
+        if (autoRestart) restart();
     }
 
-    reset() {
-        this.elapsed = 0;
+    function tick(deltaTime) {
+        timeRemaining = Math.max(0, timeRemaining - deltaTime);
+
+        if (timeRemaining === 0) handleComplete();
     }
+
+    return Object.freeze({
+        tick,
+    });
 }
 
 export default Timer;
