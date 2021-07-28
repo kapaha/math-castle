@@ -24,6 +24,7 @@ class Game {
         this.castle = castle;
         this.answerForm = document.querySelector('.answer-form');
         this.answerInput = document.querySelector('#answer-input');
+        this.gameTimer = document.querySelector('#game-timer');
         // width of area enemy can move in
         this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
@@ -56,6 +57,9 @@ class Game {
     }
 
     draw() {
+        this.gameTimer.textContent =
+            this.timers.countDownTimer.getHumanTimeRemaining();
+
         this.enemies.forEach((enemy) => enemy.draw());
     }
 
