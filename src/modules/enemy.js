@@ -65,11 +65,11 @@ class Enemy {
         this.elements.enemy.style.transform = `translate(${this.pos.x}px, ${this.pos.y}px)`;
     }
 
-    delete(game) {
+    delete() {
         // remove enemy from game-board
         this.elements.enemy.remove();
         // remove enemy from enemies array
-        game.deleteEnemy(this);
+        this.game.deleteEnemy(this);
     }
 
     hasHitCastle(game) {

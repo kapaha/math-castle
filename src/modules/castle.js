@@ -1,15 +1,16 @@
 const castle = {
     height: 400,
     width: 200,
-    lives: 3,
+    lives: null,
     elements: {
         container: document.getElementById('castle'),
         livesText: document.getElementById('castle-lives'),
     },
     game: undefined,
 
-    setup(game) {
+    setup(game, lives) {
         this.game = game;
+        this.lives = lives;
         this.draw();
     },
 
