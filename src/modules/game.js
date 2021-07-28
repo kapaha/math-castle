@@ -96,7 +96,9 @@ class Game {
         this.timers.spawnTimer = Timer(2500, this.spawnEnemy);
 
         // end game after 300000 ms (5 minutes)
-        this.timers.countDownTimer = Timer(300000, this.gameOver);
+        this.timers.countDownTimer = Timer(300000, this.gameOver, {
+            autoRestart: false,
+        });
     }
 
     handleAnswerSubmit(event) {
