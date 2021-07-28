@@ -52,8 +52,6 @@
 }
 
 #game-board {
-    background-image: url(images/Game_board1.jpg);
-    background-size: contain;
     margin: auto;
     background-color: rgb(69, 115, 136);
     height: var(--game-board-height);
@@ -130,7 +128,7 @@
 /* ********  GAME-OVER-PAGE  ******** */
 
 #game-over-page {
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 #game-over-title {
