@@ -27,7 +27,7 @@ class Game {
         // width of area enemy can move in
         this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
-        this.timers = [];
+        this.timers = {};
         this.gameState = GAMESTATE.MENU;
 
         // bind methods 'this' to Game class
@@ -41,14 +41,16 @@ class Game {
     start() {
         this.castle.setup(this);
         this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
-        this.initialiseTimers();
         this.gameState = GAMESTATE.RUNNING;
+        this.initialiseTimers();
     }
 
     update(deltaTime) {
         if (this.gameState !== GAMESTATE.RUNNING) return;
 
-        this.timers.forEach((timer) => timer.tick(deltaTime));
+        Object.keys(this.timers).forEach((key) =>
+            this.timers[key].tick(deltaTime)
+        );
 
         this.enemies.forEach((enemy) => enemy.update(this, deltaTime));
     }
@@ -87,12 +89,10 @@ class Game {
 
     initialiseTimers() {
         // spawn enemy every 2.5 seconds
-        const spawnTimer = new Timer(2500, this.spawnEnemy);
+        this.timers.spawnTimer = Timer(2500, this.spawnEnemy);
 
         // end game after 300000 ms (5 minutes)
-        const countDownTimer = new Timer(300000, this.gameOver);
-
-        this.timers.push(spawnTimer, countDownTimer);
+        this.timers.countDownTimer = Timer(300000, this.gameOver);
     }
 
     handleAnswerSubmit(event) {
