@@ -48,7 +48,6 @@ class Game {
         this.gameState = GAMESTATE.RUNNING;
         // hide start page
         startPage.style.display = 'none';
-        startPage.style.zIndex = -1;
         gameOverPage.style.display = 'none';
         gamePage.style.display = 'flex';
     }
