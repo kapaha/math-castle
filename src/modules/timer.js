@@ -13,7 +13,7 @@ function Timer(duration, onFinish, { autoRestart = true } = {}) {
     function tick(deltaTime) {
         timeRemaining = Math.max(0, timeRemaining - deltaTime);
 
-        if (timeRemaining === 0) handleComplete();
+        if (timeRemaining <= 1) handleComplete();
     }
 
     // converts time in ms to mm:ss format
