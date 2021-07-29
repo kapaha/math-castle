@@ -32,6 +32,7 @@ class Game {
         // width of area enemy can move in
         this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
+        this.selectedEnemy = null;
         this.timers = {};
         this.gameState = GAMESTATE.MENU;
 
@@ -41,6 +42,7 @@ class Game {
         this.spawnEnemy = this.spawnEnemy.bind(this);
         this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
         this.gameOver = this.gameOver.bind(this);
+        this.handleSelectEnemy = this.handleSelectEnemy.bind(this);
     }
 
     start() {
@@ -75,7 +77,7 @@ class Game {
             this.timers[key].tick(deltaTime)
         );
 
-        this.enemies.forEach((enemy) => enemy.update(this, deltaTime));
+        this.enemies.forEach((enemy) => enemy.update(deltaTime));
     }
 
     draw() {
@@ -86,15 +88,17 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemy = new Enemy(
-            0,
-            this.randomLane(),
-            this,
-            questionGenerator('insane'),
-            enemySpeed
-        );
+        const enemy = Enemy({
+            position: {
+                x: 0,
+                y: this.randomLane(),
+            },
+            speed: enemySpeed,
+            question: questionGenerator('insane'),
+            game: this,
+        });
         enemySpeed += 3;
-        this.gameBoard.element.appendChild(enemy.elements.enemy);
+        this.gameBoard.element.appendChild(enemy.element);
         this.enemies.push(enemy);
     }
 
@@ -105,8 +109,16 @@ class Game {
         return POSITION[keys[Math.floor(Math.random() * keys.length)]];
     }
 
-    deleteEnemy(enemyToDelete) {
-        this.enemies = this.enemies.filter((enemy) => enemy !== enemyToDelete);
+    deleteEnemy(element) {
+        this.enemies = this.enemies.filter((enemy) => {
+            if (enemy.element !== element) return true;
+
+            if (this.selectedEnemy === enemy) {
+                this.selectedEnemy = null;
+            }
+
+            return false;
+        });
     }
 
     gameOver() {
@@ -114,7 +126,7 @@ class Game {
         gamePage.style.display = 'none';
         gameOverPage.style.display = 'flex';
         this.enemies.forEach((enemy) => {
-            enemy.delete();
+            enemy.handleDelete();
         });
         this.answerInput.value = '';
         enemySpeed = 40;
@@ -133,15 +145,33 @@ class Game {
     handleAnswerSubmit(event) {
         event.preventDefault();
 
-        const selectedEnemy = this.enemies.find((enemy) => enemy.selected);
-        if (!selectedEnemy) return;
+        if (!this.selectedEnemy) return;
 
-        const correctAnswer = selectedEnemy.question.answer.toString();
+        const correctAnswer = this.selectedEnemy.question.answer.toString();
         const userAnswer = this.answerInput.value;
 
-        if (userAnswer === correctAnswer) selectedEnemy.delete(this);
+        if (userAnswer === correctAnswer) {
+            this.selectedEnemy.handleDelete();
+            this.selectedEnemy = null;
+        }
 
         this.answerInput.value = '';
+    }
+
+    handleSelectEnemy(event) {
+        this.answerInput.focus();
+
+        const clickedEnemy = this.enemies.find(
+            (enemy) => enemy.element === event.currentTarget
+        );
+
+        if (clickedEnemy === this.selectedEnemy) return;
+
+        if (this.selectedEnemy) this.selectedEnemy.toggleSelect();
+
+        clickedEnemy.toggleSelect();
+
+        this.selectedEnemy = clickedEnemy;
     }
 }
 
