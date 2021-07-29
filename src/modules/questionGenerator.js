@@ -1,10 +1,10 @@
-// \u2A09 is the unicode symbol for multiplication and \u00F7 for division in Javascript.
+// \u00D7 is the unicode symbol for multiplication and \u00F7 for division in Javascript.
 
 const operatorDifficulty = {
     easy: ['+', '-'],
-    medium: ['+', '-', '\u2A09'],
-    hard: ['+', '-', '\u2A09'],
-    insane: ['+', '-', '\u2A09', '\u00F7'],
+    medium: ['+', '-', '\u00D7'],
+    hard: ['+', '-', '\u00D7'],
+    insane: ['+', '-', '\u00D7', '\u00F7'],
 };
 
 const wholeNumberGenerator = (number) => Math.floor(Math.random() * number);
@@ -44,7 +44,7 @@ const answerQuestion = (question) => {
         answer = num1 + num2;
     } else if (operator === '-') {
         answer = num1 - num2;
-    } else if (operator === '\u2A09') {
+    } else if (operator === '\u00D7') {
         answer = num1 * num2;
     } else {
         answer = num1 / num2;
@@ -57,7 +57,7 @@ const questionGenerator = (difficulty) => {
     let number1 = questionNumberGenerator(difficulty);
     let number2 = questionNumberGenerator(difficulty);
     // Functions that will determine question difficulty
-    while (operator === '\u00F7'){
+    while (operator === '\u00F7') {
         if (number1 % number2 !== 0) {
             number1 = questionNumberGenerator(difficulty);
             number2 = questionNumberGenerator(difficulty);
@@ -65,7 +65,7 @@ const questionGenerator = (difficulty) => {
             break;
         }
     }
-    while (operator === '-'){
+    while (operator === '-') {
         if (number1 - number2 < 0) {
             number1 = questionNumberGenerator(difficulty);
             number2 = questionNumberGenerator(difficulty);
@@ -74,7 +74,7 @@ const questionGenerator = (difficulty) => {
         }
     }
 
-    while (operator === '\u2A09'){
+    while (operator === '\u00D7') {
         if (number1 * number2 > 150) {
             number1 = questionNumberGenerator(difficulty);
             number2 = questionNumberGenerator(difficulty);
@@ -83,7 +83,7 @@ const questionGenerator = (difficulty) => {
         }
     }
 
-    while (operator === '+'){
+    while (operator === '+') {
         if (number1 + number2 > 150) {
             number1 = questionNumberGenerator(difficulty);
             number2 = questionNumberGenerator(difficulty);
