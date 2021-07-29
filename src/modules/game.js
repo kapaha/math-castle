@@ -27,9 +27,11 @@ class Game {
         this.castle = castle;
         this.answerForm = document.querySelector('.answer-form');
         this.answerInput = document.querySelector('#answer-input');
+        this.gameTimer = document.querySelector('#game-timer');
         // width of area enemy can move in
         this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
+        this.timers = {};
         this.gameState = GAMESTATE.MENU;
 
         // bind methods 'this' to Game class
@@ -37,15 +39,14 @@ class Game {
         this.draw = this.draw.bind(this);
         this.spawnEnemy = this.spawnEnemy.bind(this);
         this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
-
-        // spawn enemy every 2.5 seconds
-        this.spawnTimer = new Timer(2500, this.spawnEnemy);
+        this.gameOver = this.gameOver.bind(this);
     }
 
     start() {
         this.castle.setup(this, 3);
         this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
         this.gameState = GAMESTATE.RUNNING;
+        this.initialiseTimers();
         // hide start page
         startPage.style.display = 'none';
         gameOverPage.style.display = 'none';
@@ -55,11 +56,17 @@ class Game {
     update(deltaTime) {
         if (this.gameState !== GAMESTATE.RUNNING) return;
 
-        this.spawnTimer.tick(deltaTime);
+        Object.keys(this.timers).forEach((key) =>
+            this.timers[key].tick(deltaTime)
+        );
+
         this.enemies.forEach((enemy) => enemy.update(this, deltaTime));
     }
 
     draw() {
+        this.gameTimer.textContent =
+            this.timers.countDownTimer.getHumanTimeRemaining();
+
         this.enemies.forEach((enemy) => enemy.draw());
     }
 
@@ -96,6 +103,16 @@ class Game {
         });
         this.answerInput.value = '';
         enemySpeed = 40;
+    }
+
+    initialiseTimers() {
+        // spawn enemy every 2.5 seconds
+        this.timers.spawnTimer = Timer(2500, this.spawnEnemy);
+
+        // end game after 300000 ms (5 minutes)
+        this.timers.countDownTimer = Timer(300000, this.gameOver, {
+            autoRestart: false,
+        });
     }
 
     handleAnswerSubmit(event) {

@@ -16,6 +16,9 @@
 }
 
 /* ********  START PAGE  ******** */
+#start-page {
+    display: flex;
+}
 
 #le {
     font-family: 'Black Ops One', cursive;
@@ -49,6 +52,14 @@
     flex-direction: column;
     top: 0;
     z-index: 0;
+}
+
+#game-timer {
+    font-size: 4rem;
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%, 0);
 }
 
 #game-board {
@@ -128,7 +139,7 @@
 /* ********  GAME-OVER-PAGE  ******** */
 
 #game-over-page {
-    visibility: hidden;
+    display: none;
 }
 
 #game-over-title {
@@ -143,7 +154,6 @@
     width: 100%;
     background-color: #003638;
     color: #f3f2c9;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
