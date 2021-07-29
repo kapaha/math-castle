@@ -8,6 +8,8 @@ module.exports = {
         ecmaVersion: 12,
         sourceType: 'module',
     },
-    rules: {},
+    rules: {
+        'no-use-before-define': ['error', { functions: false }],
+    },
     ignorePatterns: ['dist/*'],
 };
