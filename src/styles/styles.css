@@ -16,6 +16,9 @@
 }
 
 /* ********  START PAGE  ******** */
+#start-page {
+    display: flex;
+}
 
 #le {
     font-family: 'Black Ops One', cursive;
@@ -133,6 +136,12 @@
     padding: 0.25em 0.5em;
 }
 
+/* ********  GAME-OVER-PAGE  ******** */
+
+#game-over-page {
+    display: none;
+}
+
 #game-over-title {
     margin-bottom: 1.5rem;
 }
@@ -145,7 +154,6 @@
     width: 100%;
     background-color: #003638;
     color: #f3f2c9;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
