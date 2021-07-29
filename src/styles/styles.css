@@ -133,12 +133,6 @@
     padding: 0.25em 0.5em;
 }
 
-/* ********  GAME-OVER-PAGE  ******** */
-
-#game-over-page {
-    visibility: hidden;
-}
-
 #game-over-title {
     margin-bottom: 1.5rem;
 }
