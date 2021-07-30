@@ -54,6 +54,13 @@ class Game {
         gamePage.style.display = 'flex';
     }
 
+    pause() {
+        this.GAMESTATE = GAMESTATE.PAUSED;
+        // let pauseButtonText =
+        //     document.querySelector('.pause-button').textContent;
+        // pauseButtonText = 'Pause' || 'Continue';
+    }
+
     update(deltaTime) {
         if (this.gameState !== GAMESTATE.RUNNING) return;
 
