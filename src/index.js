@@ -15,22 +15,18 @@ function startGame() {
 }
 
 function pauseGame() {
+    const pauseButtonText = ['Continue', 'Pause'];
+    const [first, second] = pauseButtonText;
     if (game.gameState === GAMESTATE.RUNNING) {
         game.pause();
         engine.stop();
+        pauseButton.textContent = first;
     } else if (game.gameState === GAMESTATE.PAUSED) {
         engine.start();
         game.continue();
+        pauseButton.textContent = second;
     }
-    console.log(engine.running);
-    console.log(game.gameState);
 }
-
-// function restartGame() {
-//     game = new Game();
-//     //  engine = new Engine(game.update, game.draw);
-//     game.start();
-// }
 
 startButton.addEventListener('click', startGame);
 restartButton.addEventListener('click', startGame);
