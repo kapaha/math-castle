@@ -4,7 +4,7 @@ import Enemy from './enemy';
 import Timer from './timer';
 import questionGenerator from './questionGenerator';
 
-const GAMESTATE = {
+export const GAMESTATE = {
     MENU: 0,
     RUNNING: 1,
     GAMEOVER: 2,
@@ -55,10 +55,11 @@ class Game {
     }
 
     pause() {
-        this.GAMESTATE = GAMESTATE.PAUSED;
-        // let pauseButtonText =
-        //     document.querySelector('.pause-button').textContent;
-        // pauseButtonText = 'Pause' || 'Continue';
+        this.gameState = GAMESTATE.PAUSED;
+    }
+
+    continue() {
+        this.gameState = GAMESTATE.RUNNING;
     }
 
     update(deltaTime) {

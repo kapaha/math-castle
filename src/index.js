@@ -1,5 +1,5 @@
 import './styles/styles.css';
-import Game from './modules/game';
+import Game, { GAMESTATE } from './modules/game';
 import Engine from './modules/engine';
 
 const game = new Game();
@@ -15,8 +15,15 @@ function startGame() {
 }
 
 function pauseGame() {
-    game.pause();
-    engine.stop();
+    if (game.gameState === GAMESTATE.RUNNING) {
+        game.pause();
+        engine.stop();
+    } else if (game.gameState === GAMESTATE.PAUSED) {
+        engine.start();
+        game.continue();
+    }
+    console.log(engine.running);
+    console.log(game.gameState);
 }
 
 // function restartGame() {
