@@ -3,7 +3,8 @@
 }
 
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Luckiest Guy', cursive;
+    letter-spacing: 5px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -15,9 +16,65 @@
     align-items: center;
 }
 
+/* ********  COMMON STYLES  ******** */
+
+#start-page,
+#game-over-page {
+    height: 100vh;
+    width: 100%;
+    background-color: #003638;
+    color: #f3f2c9;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 100%;
+    z-index: 1;
+}
+
+.title {
+    font-size: 3.5rem;
+    padding: 3rem;
+}
+
+.button {
+    margin-top: 2rem;
+    box-shadow: inset 0px 1px 3px 0px #91b8b3;
+    background-color: #2779c3;
+    border-radius: 15px;
+    border: 1px solid #566963;
+    display: inline-block;
+    cursor: pointer;
+    color: #f3f2c9;
+    font-size: 1.5rem;
+    padding: 11px 23px;
+    text-decoration: none;
+}
+
+.button:active {
+    position: relative;
+    top: 1px;
+}
+
 /* ********  START PAGE  ******** */
 #start-page {
     display: flex;
+    background-image: url('../img/start.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.start-button {
+    margin-top: 300px;
+    font-size: 40px;
+    width: 450px;
+    height: 90px;
+    border: solid white 3px;
+    box-shadow: 0px 15px 1px rgba(19, 69, 115, 0.8);
+    /* transition: box-shadow 0.1s ease-in; */
+}
+
+.start-button:hover {
+    box-shadow: none;
 }
 
 #le {
@@ -139,58 +196,19 @@
 /* ********  GAME-OVER-PAGE  ******** */
 
 #game-over-page {
-    display: none;
+    display: flex;
+    background-image: url('../img/game_over-2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-#game-over-title {
-    margin-bottom: 1.5rem;
-}
-
-/* ********  COMMON STYLES  ******** */
-
-#start-page,
-#game-over-page {
-    height: 100vh;
-    width: 100%;
-    background-color: #003638;
-    color: #f3f2c9;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 90%;
-    z-index: 1;
-}
-
-.title {
-    font-family: 'Merriweather', serif;
-    font-size: 3.5rem;
-    padding: 3rem;
-}
-
-.button {
-    margin-top: 2rem;
-    box-shadow: inset 0px 1px 3px 0px #91b8b3;
-    background: linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
-    background-color: #768d87;
-    border-radius: 5px;
-    border: 1px solid #566963;
-    display: inline-block;
-    cursor: pointer;
-    color: #f3f2c9;
-    font-family: 'Black Ops One', cursive;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 11px 23px;
-    text-decoration: none;
-    text-shadow: 0px -1px 0px #2b665e;
-}
-
-.button:hover {
-    background: linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
-    background-color: #6c7c7c;
-}
-
-.button:active {
-    position: relative;
-    top: 1px;
-}
+/* #game-over-title {
+    font-size: 6rem;
+    margin-bottom: 100px;
+    background-color: rgba(105, 60, 35, .2);
+    color: transparent;
+    text-shadow: 0px 5px 5px rgba(206, 127, 84, 1);
+    -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+} */
