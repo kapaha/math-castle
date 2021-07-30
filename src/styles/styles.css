@@ -136,6 +136,10 @@
     padding: 0.25em 0.5em;
 }
 
+.pause-button {
+    width: 8rem;
+}
+
 /* ********  GAME-OVER-PAGE  ******** */
 
 #game-over-page {

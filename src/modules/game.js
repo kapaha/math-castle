@@ -8,6 +8,7 @@ const GAMESTATE = {
     MENU: 0,
     RUNNING: 1,
     GAMEOVER: 2,
+    PAUSED: 3,
 };
 
 const POSITION = {
