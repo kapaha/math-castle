@@ -56,10 +56,16 @@ class Game {
 
     pause() {
         this.gameState = GAMESTATE.PAUSED;
+        this.enemies.forEach((enemy) =>
+            enemy.elements.enemy.classList.add('not-clickable')
+        );
     }
 
     continue() {
         this.gameState = GAMESTATE.RUNNING;
+        this.enemies.forEach((enemy) =>
+            enemy.elements.enemy.classList.remove('not-clickable')
+        );
     }
 
     update(deltaTime) {
