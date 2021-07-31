@@ -117,6 +117,10 @@
     font-size: 1rem;
 }
 
+.not-clickable {
+    pointer-events: none;
+}
+
 /* Answer form styles */
 .answer-form {
     background-color: lightblue;
@@ -134,6 +138,10 @@
     width: 300px;
     font-size: 1rem;
     padding: 0.25em 0.5em;
+}
+
+.pause-button {
+    width: 10rem;
 }
 
 /* ********  GAME-OVER-PAGE  ******** */
