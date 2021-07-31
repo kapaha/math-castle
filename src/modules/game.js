@@ -4,10 +4,11 @@ import Enemy from './enemy';
 import Timer from './timer';
 import questionGenerator from './questionGenerator';
 
-const GAMESTATE = {
+export const GAMESTATE = {
     MENU: 0,
     RUNNING: 1,
     GAMEOVER: 2,
+    PAUSED: 3,
 };
 
 const POSITION = {
@@ -51,6 +52,20 @@ class Game {
         startPage.style.display = 'none';
         gameOverPage.style.display = 'flex';
         gamePage.style.display = 'none';
+    }
+
+    pause() {
+        this.gameState = GAMESTATE.PAUSED;
+        this.enemies.forEach((enemy) =>
+            enemy.elements.enemy.classList.add('not-clickable')
+        );
+    }
+
+    continue() {
+        this.gameState = GAMESTATE.RUNNING;
+        this.enemies.forEach((enemy) =>
+            enemy.elements.enemy.classList.remove('not-clickable')
+        );
     }
 
     update(deltaTime) {
