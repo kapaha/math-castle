@@ -36,12 +36,16 @@ class Game {
         this.answerForm = document.querySelector('.answer-form');
         this.answerInput = document.querySelector('#answer-input');
         this.gameTimer = document.querySelector('#game-timer');
+        this.wrongAnswersEl = document.querySelector(
+            '#game-over-wrong-answers'
+        );
         // width of area enemy can move in
         this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
         this.selectedEnemy = null;
         this.timers = {};
         this.gameState = GAMESTATE.MENU;
+        this.wrongAnswers = 0;
 
         // bind methods 'this' to Game class
         this.update = this.update.bind(this);
@@ -54,6 +58,7 @@ class Game {
 
     start() {
         scoreHandler.reset();
+        this.wrongAnswers = 0;
         this.castle.setup(this, 3);
         this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
         this.gameState = GAMESTATE.RUNNING;
@@ -131,6 +136,7 @@ class Game {
 
     gameOver() {
         this.gameState = GAMESTATE.GAMEOVER;
+        this.wrongAnswersEl.textContent = `Wrong Answers: ${this.wrongAnswers}`;
         gamePage.style.display = 'none';
         gameOverPage.style.display = 'flex';
         this.enemies.forEach((enemy) => {
@@ -153,7 +159,7 @@ class Game {
     handleAnswerSubmit(event) {
         event.preventDefault();
 
-        if (!this.selectedEnemy) return;
+        if (!this.selectedEnemy || this.answerInput.value.trim() === '') return;
 
         const correctAnswer = this.selectedEnemy.question.answer.toString();
         const userAnswer = this.answerInput.value;
@@ -164,6 +170,7 @@ class Game {
             scoreHandler.addPoints(POINTS.CORRECT_ANSWER);
         } else {
             scoreHandler.addPoints(POINTS.WRONG_ANSWER);
+            this.wrongAnswers += 1;
         }
 
         this.answerInput.value = '';

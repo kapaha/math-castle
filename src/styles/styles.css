@@ -158,13 +158,15 @@
     display: none;
 }
 
-#game-over-title {
-    margin-bottom: 1.5rem;
-}
-
 #game-over-score {
     font-family: 'Merriweather', serif;
     font-size: 2rem;
+}
+
+#game-over-wrong-answers {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    margin-top: 3rem;
 }
 
 /* ********  COMMON STYLES  ******** */
