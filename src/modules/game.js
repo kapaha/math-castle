@@ -3,6 +3,7 @@ import castle from './castle';
 import Enemy from './enemy';
 import Timer from './timer';
 import questionGenerator from './questionGenerator';
+import scoreHandler from './scoreHandler';
 
 export const GAMESTATE = {
     MENU: 0,
@@ -15,6 +16,12 @@ const POSITION = {
     firstLane: 50,
     secondLane: 165,
     thirdLane: 280,
+};
+
+const POINTS = {
+    CORRECT_ANSWER: 10,
+    WRONG_ANSWER: -2,
+    CASTLE_LIFE_LOST: -10,
 };
 
 let enemySpeed = 40;
@@ -46,6 +53,7 @@ class Game {
     }
 
     start() {
+        scoreHandler.reset();
         this.castle.setup(this, 3);
         this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
         this.gameState = GAMESTATE.RUNNING;
@@ -153,6 +161,9 @@ class Game {
         if (userAnswer === correctAnswer) {
             this.selectedEnemy.handleDelete();
             this.selectedEnemy = null;
+            scoreHandler.addPoints(POINTS.CORRECT_ANSWER);
+        } else {
+            scoreHandler.addPoints(POINTS.WRONG_ANSWER);
         }
 
         this.answerInput.value = '';
@@ -172,6 +183,11 @@ class Game {
         clickedEnemy.toggleSelect();
 
         this.selectedEnemy = clickedEnemy;
+    }
+
+    damageCastle(amount) {
+        scoreHandler.addPoints(POINTS.CASTLE_LIFE_LOST);
+        this.castle.damage(amount);
     }
 }
 

@@ -35,7 +35,7 @@ function Enemy({ position: { x, y }, speed, question, game } = {}) {
     function update(deltaTime) {
         if (hasHitCastle()) {
             handleDelete();
-            game.castle.damage(1);
+            game.damageCastle(1);
             return;
         }
         // multiply speed by deltaTime in seconds
