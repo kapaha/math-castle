@@ -1,8 +1,7 @@
 import './styles/styles.css';
-import Game, { GAMESTATE } from './modules/game';
 import Engine from './modules/engine';
+import game from './modules/game';
 
-const game = new Game();
 const engine = new Engine(game.update, game.draw);
 
 const startButton = document.querySelector('.start-button');
@@ -17,13 +16,13 @@ function startGame() {
 function pauseGame() {
     const pauseButtonText = ['Continue', 'Pause'];
     const [first, second] = pauseButtonText;
-    if (game.gameState === GAMESTATE.RUNNING) {
+    if (game.gameState === game.GAMESTATES.RUNNING) {
         game.pause();
         engine.stop();
         pauseButton.textContent = first;
-    } else if (game.gameState === GAMESTATE.PAUSED) {
+    } else if (game.gameState === game.GAMESTATES.PAUSED) {
         engine.start();
-        game.continue();
+        game.unPause();
         pauseButton.textContent = second;
     }
 }
