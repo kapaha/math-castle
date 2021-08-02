@@ -3,6 +3,7 @@ import castle from './castle';
 import Enemy from './enemy';
 import Timer from './timer';
 import questionGenerator from './questionGenerator';
+import scoreHandler from './scoreHandler';
 
 export const GAMESTATE = {
     MENU: 0,
@@ -17,6 +18,12 @@ const POSITION = {
     thirdLane: 280,
 };
 
+const POINTS = {
+    CORRECT_ANSWER: 10,
+    WRONG_ANSWER: -2,
+    CASTLE_LIFE_LOST: -10,
+};
+
 let enemySpeed = 40;
 const startPage = document.getElementById('start-page');
 const gamePage = document.getElementById('game-page');
@@ -29,11 +36,16 @@ class Game {
         this.answerForm = document.querySelector('.answer-form');
         this.answerInput = document.querySelector('#answer-input');
         this.gameTimer = document.querySelector('#game-timer');
+        this.wrongAnswersEl = document.querySelector(
+            '#game-over-wrong-answers'
+        );
         // width of area enemy can move in
         this.fieldWidth = gameBoard.width - castle.width;
         this.enemies = [];
+        this.selectedEnemy = null;
         this.timers = {};
         this.gameState = GAMESTATE.MENU;
+        this.wrongAnswers = 0;
 
         // bind methods 'this' to Game class
         this.update = this.update.bind(this);
@@ -41,9 +53,12 @@ class Game {
         this.spawnEnemy = this.spawnEnemy.bind(this);
         this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
         this.gameOver = this.gameOver.bind(this);
+        this.handleSelectEnemy = this.handleSelectEnemy.bind(this);
     }
 
     start() {
+        scoreHandler.reset();
+        this.wrongAnswers = 0;
         this.castle.setup(this, 3);
         this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
         this.gameState = GAMESTATE.RUNNING;
@@ -75,7 +90,7 @@ class Game {
             this.timers[key].tick(deltaTime)
         );
 
-        this.enemies.forEach((enemy) => enemy.update(this, deltaTime));
+        this.enemies.forEach((enemy) => enemy.update(deltaTime));
     }
 
     draw() {
@@ -86,15 +101,17 @@ class Game {
     }
 
     spawnEnemy() {
-        const enemy = new Enemy(
-            0,
-            this.randomLane(),
-            this,
-            questionGenerator('insane'),
-            enemySpeed
-        );
+        const enemy = Enemy({
+            position: {
+                x: 0,
+                y: this.randomLane(),
+            },
+            speed: enemySpeed,
+            question: questionGenerator('insane'),
+            game: this,
+        });
         enemySpeed += 3;
-        this.gameBoard.element.appendChild(enemy.elements.enemy);
+        this.gameBoard.element.appendChild(enemy.element);
         this.enemies.push(enemy);
     }
 
@@ -105,16 +122,25 @@ class Game {
         return POSITION[keys[Math.floor(Math.random() * keys.length)]];
     }
 
-    deleteEnemy(enemyToDelete) {
-        this.enemies = this.enemies.filter((enemy) => enemy !== enemyToDelete);
+    deleteEnemy(element) {
+        this.enemies = this.enemies.filter((enemy) => {
+            if (enemy.element !== element) return true;
+
+            if (this.selectedEnemy === enemy) {
+                this.selectedEnemy = null;
+            }
+
+            return false;
+        });
     }
 
     gameOver() {
         this.gameState = GAMESTATE.GAMEOVER;
+        this.wrongAnswersEl.textContent = `Wrong Answers: ${this.wrongAnswers}`;
         gamePage.style.display = 'none';
         gameOverPage.style.display = 'flex';
         this.enemies.forEach((enemy) => {
-            enemy.delete();
+            enemy.handleDelete();
         });
         this.answerInput.value = '';
         enemySpeed = 40;
@@ -133,15 +159,42 @@ class Game {
     handleAnswerSubmit(event) {
         event.preventDefault();
 
-        const selectedEnemy = this.enemies.find((enemy) => enemy.selected);
-        if (!selectedEnemy) return;
+        if (!this.selectedEnemy || this.answerInput.value.trim() === '') return;
 
-        const correctAnswer = selectedEnemy.question.answer.toString();
+        const correctAnswer = this.selectedEnemy.question.answer.toString();
         const userAnswer = this.answerInput.value;
 
-        if (userAnswer === correctAnswer) selectedEnemy.delete(this);
+        if (userAnswer === correctAnswer) {
+            this.selectedEnemy.handleDelete();
+            this.selectedEnemy = null;
+            scoreHandler.addPoints(POINTS.CORRECT_ANSWER);
+        } else {
+            scoreHandler.addPoints(POINTS.WRONG_ANSWER);
+            this.wrongAnswers += 1;
+        }
 
         this.answerInput.value = '';
+    }
+
+    handleSelectEnemy(event) {
+        this.answerInput.focus();
+
+        const clickedEnemy = this.enemies.find(
+            (enemy) => enemy.element === event.currentTarget
+        );
+
+        if (clickedEnemy === this.selectedEnemy) return;
+
+        if (this.selectedEnemy) this.selectedEnemy.toggleSelect();
+
+        clickedEnemy.toggleSelect();
+
+        this.selectedEnemy = clickedEnemy;
+    }
+
+    damageCastle(amount) {
+        scoreHandler.addPoints(POINTS.CASTLE_LIFE_LOST);
+        this.castle.damage(amount);
     }
 }
 

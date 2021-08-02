@@ -1,80 +1,72 @@
-class Enemy {
-    constructor(xPos, yPos, game, question, speed) {
-        this.elements = {
-            enemy: document.createElement('div'),
-            question: document.createElement('div'),
-        };
+function Enemy({ position: { x, y }, speed, question, game } = {}) {
+    const width = 50;
+    const height = 50;
+    const position = { x, y };
+    const element = createElement();
 
-        this.pos = { x: xPos, y: yPos };
-        this.width = 50;
-        this.height = 50;
-        this.speed = speed; // px per second
-        this.selected = false; // default false (not selected)
-        this.question = question;
-        this.game = game;
+    // PRIVATE FUNCTIONS
 
-        // setting some enemy css
-        this.elements.enemy.classList.add('enemy');
-        this.elements.enemy.style.width = `${this.width}px`;
-        this.elements.enemy.style.height = `${this.height}px`;
+    function createElement() {
+        const enemyElement = document.createElement('div');
+        const questionElement = document.createElement('div');
 
-        // question element styles
-        this.elements.question.classList.add('enemy-question');
-        this.elements.question.textContent = this.question.text;
-        this.elements.enemy.appendChild(this.elements.question);
+        // set enemy element styles
+        enemyElement.classList.add('enemy');
+        enemyElement.style.width = `${width}px`;
+        enemyElement.style.height = `${height}px`;
 
-        // set enemy selected
-        this.elements.enemy.addEventListener('click', () => {
-            this.unSelect();
-            this.select();
-            this.game.answerInput.focus();
-        });
+        // set question element styles and text
+        questionElement.classList.add('enemy-question');
+        questionElement.textContent = question.text;
+
+        enemyElement.appendChild(questionElement);
+
+        enemyElement.addEventListener('click', game.handleSelectEnemy);
+
+        return enemyElement;
     }
 
-    select() {
-        // select clicked enemy
-        this.selected = true;
-        if (this.selected) {
-            this.elements.enemy.classList.add('selected');
-        }
+    function hasHitCastle() {
+        return position.x >= game.fieldWidth - width;
     }
 
-    unSelect() {
-        // remove all selected class and attribute in order to make only one selection
-        const enemiesArr = this.game.enemies;
-        const selectedEnemy = enemiesArr.find((enemy) => enemy.selected);
-        if (selectedEnemy === undefined) return;
-        selectedEnemy.selected = false;
-        selectedEnemy.elements.enemy.classList.remove('selected');
-    }
+    // PUBLIC FUNCTIONS
 
-    update(game, deltaTime) {
-        if (this.hasHitCastle(game)) {
-            this.delete(game);
-            game.castle.damage(1);
+    function update(deltaTime) {
+        if (hasHitCastle()) {
+            handleDelete();
+            game.damageCastle(1);
             return;
         }
-
-        // multiply speed by deltaTime in seconds for consistent movement across
-        // different framerates
-        this.pos.x += this.speed * (deltaTime / 1000);
+        // multiply speed by deltaTime in seconds
+        // for consistent movement across different framerates
+        position.x += speed * (deltaTime / 1000);
     }
 
-    draw() {
+    function draw() {
         // draw the enemy to different position
-        this.elements.enemy.style.transform = `translate(${this.pos.x}px, ${this.pos.y}px)`;
+        element.style.transform = `translate(${position.x}px, ${position.y}px)`;
     }
 
-    delete() {
-        // remove enemy from game-board
-        this.elements.enemy.remove();
-        // remove enemy from enemies array
-        this.game.deleteEnemy(this);
+    function handleDelete() {
+        game.deleteEnemy(element);
+        element.remove();
     }
 
-    hasHitCastle(game) {
-        return this.pos.x >= game.fieldWidth - this.width;
+    function toggleSelect() {
+        element.classList.toggle('selected');
     }
+
+    return Object.freeze({
+        update,
+        draw,
+        handleDelete,
+        toggleSelect,
+        question,
+        get element() {
+            return element;
+        },
+    });
 }
 
 export default Enemy;
