@@ -3,11 +3,19 @@
 }
 
 * {
+    text-align: center;
     font-family: 'Luckiest Guy', cursive;
-    letter-spacing: 5px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+h1 {
+    font-size: 4.5rem;
+}
+
+h2 {
+    font-size: 2rem;
 }
 
 #container {
@@ -31,16 +39,11 @@
     z-index: 1;
 }
 
-.title {
-    font-size: 3.5rem;
-    padding: 3rem;
-}
-
 .button {
+    letter-spacing: 5px;
     margin-top: 2rem;
-    box-shadow: inset 0px 1px 3px 0px #91b8b3;
     background-color: #2779c3;
-    border-radius: 15px;
+    border-radius: 10px;
     border: 1px solid #566963;
     display: inline-block;
     cursor: pointer;
@@ -204,19 +207,51 @@
 /* ********  GAME-OVER-PAGE  ******** */
 
 #game-over-page {
-    display: flex;
-    background-image: url('../img/game_over-2.png');
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../img/clouds.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-/* #game-over-title {
-    font-size: 6rem;
-    margin-bottom: 100px;
-    background-color: rgba(105, 60, 35, .2);
-    color: transparent;
-    text-shadow: 0px 5px 5px rgba(206, 127, 84, 1);
-    -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text;
-} */
+.gameover-info {
+    z-index: 999;
+}
+
+#game-over-page .container {
+    position: absolute;
+    z-index: 0;
+    width: 90%;
+    height: auto;
+    text-align: center;
+}
+
+#game-over-page .title {
+    margin-bottom: 10px;
+    color: #ce7f54;
+    text-shadow: 0px 5px 0px #5b321c;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.1);
+}
+
+#game-over-page .title-score {
+    font-size: 2rem;
+    color: #ce7f54;
+    text-shadow: 0px 3px 0px #5b321c;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.1);
+}
+
+#game-over-page .score {
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0px 4px 0px #5b321c;
+}
+
+#restart-button {
+    background-color: #ce7f54;
+    color: white;
+    box-shadow: 0px 8px 0px #5b321c;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}

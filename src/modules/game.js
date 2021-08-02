@@ -50,8 +50,8 @@ class Game {
         this.initialiseTimers();
         // hide start page
         startPage.style.display = 'none';
-        gameOverPage.style.display = 'flex';
-        gamePage.style.display = 'none';
+        gameOverPage.style.display = 'none';
+        gamePage.style.display = 'flex';
     }
 
     pause() {

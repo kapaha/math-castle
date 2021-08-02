@@ -6,7 +6,7 @@ const game = new Game();
 const engine = new Engine(game.update, game.draw);
 
 const startButton = document.querySelector('.start-button');
-const restartButton = document.querySelector('.restart-button');
+const restartButton = document.querySelector('#restart-button');
 const pauseButton = document.querySelector('.pause-button');
 
 function startGame() {
