@@ -27,7 +27,8 @@ h2 {
 /* ********  COMMON STYLES  ******** */
 
 #start-page,
-#game-over-page {
+#game-over-page,
+#difficulty-select-page {
     height: 100vh;
     width: 100%;
     background-color: #003638;
@@ -108,7 +109,7 @@ h2 {
 
 #game-page {
     position: absolute;
-    display: flex;
+    display: none;
     flex-direction: column;
     top: 0;
     z-index: 0;
@@ -262,6 +263,15 @@ h2 {
     color: white;
     box-shadow: 0px 8px 0px #5b321c;
     border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ********  DIFFICULTY-SELECT-PAGE  ******** */
+
+#difficulty-select-page {
+    display: none;
+    background-image: url(images/start.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 
