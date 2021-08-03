@@ -14,9 +14,9 @@ const GAMESTATES = {
     PAUSED: 3,
 };
 
-const startPage = document.getElementById('start-page');
-const gamePage = document.getElementById('game-page');
-const gameOverPage = document.getElementById('game-over-page');
+const startPage = document.querySelector('#start-page');
+const gamePage = document.querySelector('#game-page');
+const gameOverPage = document.querySelector('#game-over-page');
 const answerForm = document.querySelector('.answer-form');
 const answerInput = document.querySelector('#answer-input');
 const gameTimer = document.querySelector('#game-timer');
