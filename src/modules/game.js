@@ -6,6 +6,7 @@ import questionGenerator from './questionGenerator';
 import scoreHandler from './scoreHandler';
 import DEFAULT_SETTINGS from './defaultSettings';
 import { hideElement, showElement } from './domUtils';
+import Engine from './engine';
 
 const GAMESTATES = {
     MENU: 0,
@@ -21,9 +22,13 @@ const answerForm = document.querySelector('.answer-form');
 const answerInput = document.querySelector('#answer-input');
 const gameTimer = document.querySelector('#game-timer');
 const wrongAnswersEl = document.querySelector('#game-over-wrong-answers');
+const startButton = document.querySelector('.start-button');
+const restartButton = document.querySelector('#restart-button');
+const pauseButton = document.querySelector('.pause-button');
 
 const timers = {};
 const fieldWidth = gameBoard.width - castle.width;
+const engine = new Engine(update, draw);
 
 let settings = { ...DEFAULT_SETTINGS };
 let gameState = GAMESTATES.MENU;
@@ -134,14 +139,12 @@ function reset() {
     enemies.forEach((enemy) => enemy.handleDelete());
 }
 
-// PUBLIC FUNCTIONS
-
 function start() {
     reset();
-    answerForm.addEventListener('submit', handleAnswerSubmit);
     hideElement(startPage);
     showElement(gamePage, 'flex');
     gameState = GAMESTATES.RUNNING;
+    engine.start();
 }
 
 function restart() {
@@ -175,15 +178,29 @@ function draw() {
     enemies.forEach((enemy) => enemy.draw());
 }
 
+function handlePause() {
+    const pauseButtonText = ['Continue', 'Pause'];
+    const [first, second] = pauseButtonText;
+    if (gameState === GAMESTATES.RUNNING) {
+        pause();
+        engine.stop();
+        pauseButton.textContent = first;
+    } else if (gameState === GAMESTATES.PAUSED) {
+        engine.start();
+        unPause();
+        pauseButton.textContent = second;
+    }
+}
+
+// PUBLIC FUNCTIONS
+
+function init() {
+    startButton.addEventListener('click', start);
+    restartButton.addEventListener('click', restart);
+    pauseButton.addEventListener('click', handlePause);
+    answerForm.addEventListener('submit', handleAnswerSubmit);
+}
+
 export default Object.freeze({
-    GAMESTATES,
-    get gameState() {
-        return gameState;
-    },
-    start,
-    restart,
-    pause,
-    unPause,
-    update,
-    draw,
+    init,
 });
