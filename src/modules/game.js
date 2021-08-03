@@ -5,6 +5,7 @@ import Timer from './timer';
 import questionGenerator from './questionGenerator';
 import scoreHandler from './scoreHandler';
 import DEFAULT_SETTINGS from './defaultSettings';
+import { hideElement, showElement } from './domUtils';
 
 const GAMESTATES = {
     MENU: 0,
@@ -21,10 +22,10 @@ const answerInput = document.querySelector('#answer-input');
 const gameTimer = document.querySelector('#game-timer');
 const wrongAnswersEl = document.querySelector('#game-over-wrong-answers');
 
-const settings = { ...DEFAULT_SETTINGS };
 const timers = {};
 const fieldWidth = gameBoard.width - castle.width;
 
+let settings = { ...DEFAULT_SETTINGS };
 let gameState = GAMESTATES.MENU;
 let selectedEnemy = null;
 let wrongAnswers = 0;
@@ -63,18 +64,6 @@ function deleteEnemy(element) {
 
         return false;
     });
-}
-
-function gameOver() {
-    gameState = GAMESTATES.GAMEOVER;
-    wrongAnswersEl.textContent = `Wrong Answers: ${wrongAnswers}`;
-    gamePage.style.display = 'none';
-    gameOverPage.style.display = 'flex';
-    enemies.forEach((enemy) => {
-        enemy.handleDelete();
-    });
-    answerInput.value = '';
-    settings.enemySpeed = DEFAULT_SETTINGS.enemySpeed;
 }
 
 function initialiseTimers() {
@@ -128,19 +117,38 @@ function damageCastle(amount) {
     castle.damage(amount, gameOver);
 }
 
+function gameOver() {
+    gameState = GAMESTATES.GAMEOVER;
+    wrongAnswersEl.textContent = `Wrong Answers: ${wrongAnswers}`;
+    hideElement(gamePage);
+    showElement(gameOverPage, 'flex');
+}
+
+function reset() {
+    settings = { ...DEFAULT_SETTINGS };
+    initialiseTimers();
+    scoreHandler.reset();
+    wrongAnswers = 0;
+    answerInput.value = '';
+    castle.setup(settings.castleStartingLives);
+    enemies.forEach((enemy) => enemy.handleDelete());
+}
+
 // PUBLIC FUNCTIONS
 
 function start() {
-    scoreHandler.reset();
-    wrongAnswers = 0;
-    castle.setup(settings.castleStartingLives);
+    reset();
     answerForm.addEventListener('submit', handleAnswerSubmit);
+    hideElement(startPage);
+    showElement(gamePage, 'flex');
     gameState = GAMESTATES.RUNNING;
-    initialiseTimers();
-    // hide start page
-    startPage.style.display = 'none';
-    gameOverPage.style.display = 'none';
-    gamePage.style.display = 'flex';
+}
+
+function restart() {
+    reset();
+    hideElement(gameOverPage);
+    showElement(gamePage, 'flex');
+    gameState = GAMESTATES.RUNNING;
 }
 
 function pause() {
@@ -173,6 +181,7 @@ export default Object.freeze({
         return gameState;
     },
     start,
+    restart,
     pause,
     unPause,
     update,

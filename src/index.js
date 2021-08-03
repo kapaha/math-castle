@@ -28,5 +28,5 @@ function pauseGame() {
 }
 
 startButton.addEventListener('click', startGame);
-restartButton.addEventListener('click', startGame);
+restartButton.addEventListener('click', game.restart);
 pauseButton.addEventListener('click', pauseGame);
