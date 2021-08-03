@@ -36,6 +36,10 @@
             <div id="game-page">
                 <button class="button pause-button">Pause</button>
                 <p id="game-timer"></p>
+                <p id="game-score">
+                    Score:
+                    <span data-score-display></span>
+                </p>
                 <div id="game-board">
                     <div id="castle">
                         <p id="castle-lives"></p>
@@ -52,9 +56,9 @@
                 <div class="gameover-info">
                     <h1 class="title">Game Over</h1>
                     <h2 class="title-score">Score:</h2>
-                    <h2 id="game-over-score" class="score">10</h2>
-                    <h2 class="title-score">Wrong score</h2>
-                    <h2 id="game-over-wrong-score" class="score">10</h2>
+                    <h2 data-score-display class="score">10</h2>
+                    <h2 class="title-score">Wrong answers:</h2>
+                    <h2 id="game-over-wrong-answers" class="score">10</h2>
                     <button id="restart-button" class="button">Restart</button>
                 </div>
             </div>

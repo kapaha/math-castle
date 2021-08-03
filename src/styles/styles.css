@@ -114,6 +114,14 @@ h2 {
     z-index: 0;
 }
 
+#game-score {
+    font-size: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 80px;
+    transform: translate(-50%, 0);
+}
+
 #game-timer {
     font-size: 4rem;
     position: absolute;

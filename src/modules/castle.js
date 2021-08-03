@@ -6,19 +6,17 @@ const castle = {
         container: document.getElementById('castle'),
         livesText: document.getElementById('castle-lives'),
     },
-    game: undefined,
 
-    setup(game, lives) {
-        this.game = game;
+    setup(lives) {
         this.lives = lives;
         this.draw();
     },
 
-    damage(amount) {
+    damage(amount, onGameOver) {
         this.lives -= amount;
         this.draw();
 
-        if (this.lives === 0) this.game.gameOver();
+        if (this.lives === 0) onGameOver();
     },
 
     draw() {
