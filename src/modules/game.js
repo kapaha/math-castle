@@ -18,6 +18,7 @@ const GAMESTATES = {
 const startPage = document.querySelector('#start-page');
 const gamePage = document.querySelector('#game-page');
 const gameOverPage = document.querySelector('#game-over-page');
+const difficultySelectPage = document.querySelector('#difficulty-select-page');
 const answerForm = document.querySelector('.answer-form');
 const answerInput = document.querySelector('#answer-input');
 const gameTimer = document.querySelector('#game-timer');
@@ -25,12 +26,14 @@ const wrongAnswersEl = document.querySelector('#game-over-wrong-answers');
 const startButton = document.querySelector('.start-button');
 const restartButton = document.querySelector('#restart-button');
 const pauseButton = document.querySelector('.pause-button');
+const difficultyButtons = document.querySelectorAll('[data-difficulty');
+const homeButton = document.querySelector('#home-button');
 
+const settings = { ...DEFAULT_SETTINGS };
 const timers = {};
 const fieldWidth = gameBoard.width - castle.width;
 const engine = new Engine(update, draw);
 
-let settings = { ...DEFAULT_SETTINGS };
 let gameState = GAMESTATES.MENU;
 let selectedEnemy = null;
 let wrongAnswers = 0;
@@ -130,7 +133,7 @@ function gameOver() {
 }
 
 function reset() {
-    settings = { ...DEFAULT_SETTINGS };
+    settings.enemySpeed = DEFAULT_SETTINGS.enemySpeed;
     initialiseTimers();
     scoreHandler.reset();
     wrongAnswers = 0;
@@ -139,10 +142,9 @@ function reset() {
     enemies.forEach((enemy) => enemy.handleDelete());
 }
 
-function start() {
+function start(selectedDifficulty) {
     reset();
-    hideElement(startPage);
-    showElement(gamePage, 'flex');
+    settings.questionDifficulty = selectedDifficulty;
     gameState = GAMESTATES.RUNNING;
     engine.start();
 }
@@ -192,13 +194,36 @@ function handlePause() {
     }
 }
 
+function handleStartButtonClick() {
+    hideElement(startPage);
+    showElement(difficultySelectPage, 'flex');
+}
+
+function handleDifficultySelect(event) {
+    const selectedDifficulty = event.target.dataset.difficulty;
+    hideElement(difficultySelectPage);
+    showElement(gamePage, 'flex');
+    start(selectedDifficulty);
+}
+
+function handleHomeButtonClick() {
+    engine.stop();
+    gameState = GAMESTATES.MENU;
+    hideElement(gamePage);
+    showElement(difficultySelectPage, 'flex');
+}
+
 // PUBLIC FUNCTIONS
 
 function init() {
-    startButton.addEventListener('click', start);
+    startButton.addEventListener('click', handleStartButtonClick);
     restartButton.addEventListener('click', restart);
     pauseButton.addEventListener('click', handlePause);
     answerForm.addEventListener('submit', handleAnswerSubmit);
+    difficultyButtons.forEach((button) =>
+        button.addEventListener('click', handleDifficultySelect)
+    );
+    homeButton.addEventListener('click', handleHomeButtonClick);
 }
 
 export default Object.freeze({
