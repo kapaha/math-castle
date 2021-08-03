@@ -1,4 +1,12 @@
-function Enemy({ position: { x, y }, speed, question, game } = {}) {
+function Enemy({
+    position: { x, y },
+    speed,
+    question,
+    fieldWidth,
+    handleSelectEnemy,
+    damageCastle,
+    deleteEnemy,
+} = {}) {
     const width = 50;
     const height = 50;
     const position = { x, y };
@@ -21,13 +29,13 @@ function Enemy({ position: { x, y }, speed, question, game } = {}) {
 
         enemyElement.appendChild(questionElement);
 
-        enemyElement.addEventListener('click', game.handleSelectEnemy);
+        enemyElement.addEventListener('click', handleSelectEnemy);
 
         return enemyElement;
     }
 
     function hasHitCastle() {
-        return position.x >= game.fieldWidth - width;
+        return position.x >= fieldWidth - width;
     }
 
     // PUBLIC FUNCTIONS
@@ -35,7 +43,7 @@ function Enemy({ position: { x, y }, speed, question, game } = {}) {
     function update(deltaTime) {
         if (hasHitCastle()) {
             handleDelete();
-            game.damageCastle(1);
+            damageCastle(1);
             return;
         }
         // multiply speed by deltaTime in seconds
@@ -49,7 +57,7 @@ function Enemy({ position: { x, y }, speed, question, game } = {}) {
     }
 
     function handleDelete() {
-        game.deleteEnemy(element);
+        deleteEnemy(element);
         element.remove();
     }
 

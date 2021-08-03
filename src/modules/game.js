@@ -4,198 +4,186 @@ import Enemy from './enemy';
 import Timer from './timer';
 import questionGenerator from './questionGenerator';
 import scoreHandler from './scoreHandler';
+import DEFAULT_SETTINGS from './defaultSettings';
+import { hideElement, showElement } from './domUtils';
 
-export const GAMESTATE = {
+const GAMESTATES = {
     MENU: 0,
     RUNNING: 1,
     GAMEOVER: 2,
     PAUSED: 3,
 };
 
-const POSITION = {
-    firstLane: 50,
-    secondLane: 165,
-    thirdLane: 280,
-};
+const startPage = document.querySelector('#start-page');
+const gamePage = document.querySelector('#game-page');
+const gameOverPage = document.querySelector('#game-over-page');
+const answerForm = document.querySelector('.answer-form');
+const answerInput = document.querySelector('#answer-input');
+const gameTimer = document.querySelector('#game-timer');
+const wrongAnswersEl = document.querySelector('#game-over-wrong-answers');
 
-const POINTS = {
-    CORRECT_ANSWER: 10,
-    WRONG_ANSWER: -2,
-    CASTLE_LIFE_LOST: -10,
-};
+const timers = {};
+const fieldWidth = gameBoard.width - castle.width;
 
-let enemySpeed = 40;
-const startPage = document.getElementById('start-page');
-const gamePage = document.getElementById('game-page');
-const gameOverPage = document.getElementById('game-over-page');
+let settings = { ...DEFAULT_SETTINGS };
+let gameState = GAMESTATES.MENU;
+let selectedEnemy = null;
+let wrongAnswers = 0;
+let enemies = [];
 
-class Game {
-    constructor() {
-        this.gameBoard = gameBoard;
-        this.castle = castle;
-        this.answerForm = document.querySelector('.answer-form');
-        this.answerInput = document.querySelector('#answer-input');
-        this.gameTimer = document.querySelector('#game-timer');
-        this.wrongAnswersEl = document.querySelector(
-            '#game-over-wrong-answers'
-        );
-        // width of area enemy can move in
-        this.fieldWidth = gameBoard.width - castle.width;
-        this.enemies = [];
-        this.selectedEnemy = null;
-        this.timers = {};
-        this.gameState = GAMESTATE.MENU;
-        this.wrongAnswers = 0;
+// PRIVATE FUNCTIONS
 
-        // bind methods 'this' to Game class
-        this.update = this.update.bind(this);
-        this.draw = this.draw.bind(this);
-        this.spawnEnemy = this.spawnEnemy.bind(this);
-        this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
-        this.gameOver = this.gameOver.bind(this);
-        this.handleSelectEnemy = this.handleSelectEnemy.bind(this);
-    }
-
-    start() {
-        scoreHandler.reset();
-        this.wrongAnswers = 0;
-        this.castle.setup(this, 3);
-        this.answerForm.addEventListener('submit', this.handleAnswerSubmit);
-        this.gameState = GAMESTATE.RUNNING;
-        this.initialiseTimers();
-        // hide start page
-        startPage.style.display = 'none';
-        gameOverPage.style.display = 'none';
-        gamePage.style.display = 'flex';
-    }
-
-    pause() {
-        this.gameState = GAMESTATE.PAUSED;
-        this.enemies.forEach((enemy) =>
-            enemy.elements.enemy.classList.add('not-clickable')
-        );
-    }
-
-    continue() {
-        this.gameState = GAMESTATE.RUNNING;
-        this.enemies.forEach((enemy) =>
-            enemy.elements.enemy.classList.remove('not-clickable')
-        );
-    }
-
-    update(deltaTime) {
-        if (this.gameState !== GAMESTATE.RUNNING) return;
-
-        Object.keys(this.timers).forEach((key) =>
-            this.timers[key].tick(deltaTime)
-        );
-
-        this.enemies.forEach((enemy) => enemy.update(deltaTime));
-    }
-
-    draw() {
-        this.gameTimer.textContent =
-            this.timers.countDownTimer.getHumanTimeRemaining();
-
-        this.enemies.forEach((enemy) => enemy.draw());
-    }
-
-    spawnEnemy() {
-        const enemy = Enemy({
-            position: {
-                x: 0,
-                y: this.randomLane(),
-            },
-            speed: enemySpeed,
-            question: questionGenerator('insane'),
-            game: this,
-        });
-        enemySpeed += 3;
-        this.gameBoard.element.appendChild(enemy.element);
-        this.enemies.push(enemy);
-    }
-
-    // eslint-disable-next-line class-methods-use-this
-    randomLane() {
-        // randomly choose an object keys in the POSITION object
-        const keys = Object.keys(POSITION);
-        return POSITION[keys[Math.floor(Math.random() * keys.length)]];
-    }
-
-    deleteEnemy(element) {
-        this.enemies = this.enemies.filter((enemy) => {
-            if (enemy.element !== element) return true;
-
-            if (this.selectedEnemy === enemy) {
-                this.selectedEnemy = null;
-            }
-
-            return false;
-        });
-    }
-
-    gameOver() {
-        this.gameState = GAMESTATE.GAMEOVER;
-        this.wrongAnswersEl.textContent = `Wrong Answers: ${this.wrongAnswers}`;
-        gamePage.style.display = 'none';
-        gameOverPage.style.display = 'flex';
-        this.enemies.forEach((enemy) => {
-            enemy.handleDelete();
-        });
-        this.answerInput.value = '';
-        enemySpeed = 40;
-    }
-
-    initialiseTimers() {
-        // spawn enemy every 2.5 seconds
-        this.timers.spawnTimer = Timer(2500, this.spawnEnemy);
-
-        // end game after 300000 ms (5 minutes)
-        this.timers.countDownTimer = Timer(300000, this.gameOver, {
-            autoRestart: false,
-        });
-    }
-
-    handleAnswerSubmit(event) {
-        event.preventDefault();
-
-        if (!this.selectedEnemy || this.answerInput.value.trim() === '') return;
-
-        const correctAnswer = this.selectedEnemy.question.answer.toString();
-        const userAnswer = this.answerInput.value;
-
-        if (userAnswer === correctAnswer) {
-            this.selectedEnemy.handleDelete();
-            this.selectedEnemy = null;
-            scoreHandler.addPoints(POINTS.CORRECT_ANSWER);
-        } else {
-            scoreHandler.addPoints(POINTS.WRONG_ANSWER);
-            this.wrongAnswers += 1;
-        }
-
-        this.answerInput.value = '';
-    }
-
-    handleSelectEnemy(event) {
-        this.answerInput.focus();
-
-        const clickedEnemy = this.enemies.find(
-            (enemy) => enemy.element === event.currentTarget
-        );
-
-        if (clickedEnemy === this.selectedEnemy) return;
-
-        if (this.selectedEnemy) this.selectedEnemy.toggleSelect();
-
-        clickedEnemy.toggleSelect();
-
-        this.selectedEnemy = clickedEnemy;
-    }
-
-    damageCastle(amount) {
-        scoreHandler.addPoints(POINTS.CASTLE_LIFE_LOST);
-        this.castle.damage(amount);
-    }
+function spawnEnemy() {
+    const enemy = Enemy({
+        position: getRandomSpawnPoint(),
+        speed: settings.enemySpeed,
+        question: questionGenerator(settings.questionDifficulty),
+        fieldWidth,
+        handleSelectEnemy,
+        damageCastle,
+        deleteEnemy,
+    });
+    settings.enemySpeed += settings.enemySpeedIncrement;
+    gameBoard.element.appendChild(enemy.element);
+    enemies.push(enemy);
 }
 
-export default Game;
+function getRandomSpawnPoint() {
+    // randomly choose an object keys in the POSITION object
+    const keys = Object.keys(settings.SPAWN_POINTS);
+    return settings.SPAWN_POINTS[keys[Math.floor(Math.random() * keys.length)]];
+}
+
+function deleteEnemy(element) {
+    enemies = enemies.filter((enemy) => {
+        if (enemy.element !== element) return true;
+
+        if (selectedEnemy === enemy) {
+            selectedEnemy = null;
+        }
+
+        return false;
+    });
+}
+
+function initialiseTimers() {
+    // spawn enemy every 2.5 seconds
+    timers.spawnTimer = Timer(settings.spawnTimerMs, spawnEnemy);
+
+    // end game after 300000 ms (5 minutes)
+    timers.gameTimer = Timer(settings.gameTimerMs, gameOver, {
+        autoRestart: false,
+    });
+}
+
+function handleAnswerSubmit(event) {
+    event.preventDefault();
+
+    if (!selectedEnemy || answerInput.value.trim() === '') return;
+
+    const correctAnswer = selectedEnemy.question.answer.toString();
+    const userAnswer = answerInput.value;
+
+    if (userAnswer === correctAnswer) {
+        selectedEnemy.handleDelete();
+        selectedEnemy = null;
+        scoreHandler.addPoints(settings.POINTS.CORRECT_ANSWER);
+    } else {
+        scoreHandler.addPoints(settings.POINTS.WRONG_ANSWER);
+        wrongAnswers += 1;
+    }
+
+    answerInput.value = '';
+}
+
+function handleSelectEnemy(event) {
+    answerInput.focus();
+
+    const clickedEnemy = enemies.find(
+        (enemy) => enemy.element === event.currentTarget
+    );
+
+    if (clickedEnemy === selectedEnemy) return;
+
+    if (selectedEnemy) selectedEnemy.toggleSelect();
+
+    clickedEnemy.toggleSelect();
+
+    selectedEnemy = clickedEnemy;
+}
+
+function damageCastle(amount) {
+    scoreHandler.addPoints(settings.POINTS.CASTLE_LIFE_LOST);
+    castle.damage(amount, gameOver);
+}
+
+function gameOver() {
+    gameState = GAMESTATES.GAMEOVER;
+    wrongAnswersEl.textContent = `Wrong Answers: ${wrongAnswers}`;
+    hideElement(gamePage);
+    showElement(gameOverPage, 'flex');
+}
+
+function reset() {
+    settings = { ...DEFAULT_SETTINGS };
+    initialiseTimers();
+    scoreHandler.reset();
+    wrongAnswers = 0;
+    answerInput.value = '';
+    castle.setup(settings.castleStartingLives);
+    enemies.forEach((enemy) => enemy.handleDelete());
+}
+
+// PUBLIC FUNCTIONS
+
+function start() {
+    reset();
+    answerForm.addEventListener('submit', handleAnswerSubmit);
+    hideElement(startPage);
+    showElement(gamePage, 'flex');
+    gameState = GAMESTATES.RUNNING;
+}
+
+function restart() {
+    reset();
+    hideElement(gameOverPage);
+    showElement(gamePage, 'flex');
+    gameState = GAMESTATES.RUNNING;
+}
+
+function pause() {
+    gameState = GAMESTATES.PAUSED;
+    enemies.forEach((enemy) => enemy.element.classList.add('not-clickable'));
+}
+
+function unPause() {
+    gameState = GAMESTATES.RUNNING;
+    enemies.forEach((enemy) => enemy.element.classList.remove('not-clickable'));
+}
+
+function update(deltaTime) {
+    if (gameState !== GAMESTATES.RUNNING) return;
+
+    Object.keys(timers).forEach((key) => timers[key].tick(deltaTime));
+
+    enemies.forEach((enemy) => enemy.update(deltaTime));
+}
+
+function draw() {
+    gameTimer.textContent = timers.gameTimer.getHumanTimeRemaining();
+
+    enemies.forEach((enemy) => enemy.draw());
+}
+
+export default Object.freeze({
+    GAMESTATES,
+    get gameState() {
+        return gameState;
+    },
+    start,
+    restart,
+    pause,
+    unPause,
+    update,
+    draw,
+});
