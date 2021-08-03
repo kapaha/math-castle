@@ -4,24 +4,13 @@ import Enemy from './enemy';
 import Timer from './timer';
 import questionGenerator from './questionGenerator';
 import scoreHandler from './scoreHandler';
+import DEFAULT_SETTINGS from './defaultSettings';
 
 const GAMESTATES = {
     MENU: 0,
     RUNNING: 1,
     GAMEOVER: 2,
     PAUSED: 3,
-};
-
-const POSITION = {
-    firstLane: 50,
-    secondLane: 165,
-    thirdLane: 280,
-};
-
-const POINTS = {
-    CORRECT_ANSWER: 10,
-    WRONG_ANSWER: -2,
-    CASTLE_LIFE_LOST: -10,
 };
 
 const startPage = document.getElementById('start-page');
@@ -32,39 +21,36 @@ const answerInput = document.querySelector('#answer-input');
 const gameTimer = document.querySelector('#game-timer');
 const wrongAnswersEl = document.querySelector('#game-over-wrong-answers');
 
-const fieldWidth = gameBoard.width - castle.width;
+const settings = { ...DEFAULT_SETTINGS };
 const timers = {};
+const fieldWidth = gameBoard.width - castle.width;
 
 let gameState = GAMESTATES.MENU;
 let selectedEnemy = null;
 let wrongAnswers = 0;
-let enemySpeed = 40;
 let enemies = [];
 
 // PRIVATE FUNCTIONS
 
 function spawnEnemy() {
     const enemy = Enemy({
-        position: {
-            x: 0,
-            y: randomLane(),
-        },
-        speed: enemySpeed,
-        question: questionGenerator('insane'),
+        position: getRandomSpawnPoint(),
+        speed: settings.enemySpeed,
+        question: questionGenerator(settings.questionDifficulty),
         fieldWidth,
         handleSelectEnemy,
         damageCastle,
         deleteEnemy,
     });
-    enemySpeed += 3;
+    settings.enemySpeed += settings.enemySpeedIncrement;
     gameBoard.element.appendChild(enemy.element);
     enemies.push(enemy);
 }
 
-function randomLane() {
+function getRandomSpawnPoint() {
     // randomly choose an object keys in the POSITION object
-    const keys = Object.keys(POSITION);
-    return POSITION[keys[Math.floor(Math.random() * keys.length)]];
+    const keys = Object.keys(settings.SPAWN_POINTS);
+    return settings.SPAWN_POINTS[keys[Math.floor(Math.random() * keys.length)]];
 }
 
 function deleteEnemy(element) {
@@ -88,15 +74,15 @@ function gameOver() {
         enemy.handleDelete();
     });
     answerInput.value = '';
-    enemySpeed = 40;
+    settings.enemySpeed = DEFAULT_SETTINGS.enemySpeed;
 }
 
 function initialiseTimers() {
     // spawn enemy every 2.5 seconds
-    timers.spawnTimer = Timer(2500, spawnEnemy);
+    timers.spawnTimer = Timer(settings.spawnTimerMs, spawnEnemy);
 
     // end game after 300000 ms (5 minutes)
-    timers.countDownTimer = Timer(300000, gameOver, {
+    timers.gameTimer = Timer(settings.gameTimerMs, gameOver, {
         autoRestart: false,
     });
 }
@@ -112,9 +98,9 @@ function handleAnswerSubmit(event) {
     if (userAnswer === correctAnswer) {
         selectedEnemy.handleDelete();
         selectedEnemy = null;
-        scoreHandler.addPoints(POINTS.CORRECT_ANSWER);
+        scoreHandler.addPoints(settings.POINTS.CORRECT_ANSWER);
     } else {
-        scoreHandler.addPoints(POINTS.WRONG_ANSWER);
+        scoreHandler.addPoints(settings.POINTS.WRONG_ANSWER);
         wrongAnswers += 1;
     }
 
@@ -138,7 +124,7 @@ function handleSelectEnemy(event) {
 }
 
 function damageCastle(amount) {
-    scoreHandler.addPoints(POINTS.CASTLE_LIFE_LOST);
+    scoreHandler.addPoints(settings.POINTS.CASTLE_LIFE_LOST);
     castle.damage(amount, gameOver);
 }
 
@@ -147,7 +133,7 @@ function damageCastle(amount) {
 function start() {
     scoreHandler.reset();
     wrongAnswers = 0;
-    castle.setup(3);
+    castle.setup(settings.castleStartingLives);
     answerForm.addEventListener('submit', handleAnswerSubmit);
     gameState = GAMESTATES.RUNNING;
     initialiseTimers();
@@ -176,7 +162,7 @@ function update(deltaTime) {
 }
 
 function draw() {
-    gameTimer.textContent = timers.countDownTimer.getHumanTimeRemaining();
+    gameTimer.textContent = timers.gameTimer.getHumanTimeRemaining();
 
     enemies.forEach((enemy) => enemy.draw());
 }
