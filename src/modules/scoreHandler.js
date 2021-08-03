@@ -5,7 +5,7 @@ let score = 0;
 function draw() {
     scoreElements.forEach((element) => {
         const el = element;
-        el.textContent = `Score: ${score}`;
+        el.textContent = score;
     });
 }
 

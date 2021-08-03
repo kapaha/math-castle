@@ -119,7 +119,7 @@ function damageCastle(amount) {
 
 function gameOver() {
     gameState = GAMESTATES.GAMEOVER;
-    wrongAnswersEl.textContent = `Wrong Answers: ${wrongAnswers}`;
+    wrongAnswersEl.textContent = wrongAnswers;
     hideElement(gamePage);
     showElement(gameOverPage, 'flex');
 }

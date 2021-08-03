@@ -8,7 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Merriweather:wght@400;900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
             rel="stylesheet"
         />
         <title>Castle Game</title>
@@ -16,25 +16,16 @@
     <body>
         <div id="container">
             <div id="start-page">
-                <h1 id="game-title" class="title">
-                    Math Cast<span id="le">le</span>
-                </h1>
-                <div id="instructions">
-                    <h2 class="instructions-header">Instructions:</h2>
-                    <p class="instructions-paragraph">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Magnam nulla explicabo magni sequi ipsam ad atque? Amet
-                        vitae minus non optio consequatur iste. Molestiae dolore
-                        quasi saepe, officiis necessitatibus modi!
-                    </p>
-                </div>
                 <button class="button start-button">Play</button>
             </div>
 
             <div id="game-page">
                 <button class="button pause-button">Pause</button>
                 <p id="game-timer"></p>
-                <p data-score-display id="game-score"></p>
+                <p id="game-score">
+                    Score:
+                    <span data-score-display></span>
+                </p>
                 <div id="game-board">
                     <div id="castle">
                         <p id="castle-lives"></p>
@@ -47,10 +38,15 @@
             </div>
 
             <div id="game-over-page">
-                <h1 id="game-over-title" class="title">Game Over</h1>
-                <p data-score-display id="game-over-score"></p>
-                <p id="game-over-wrong-answers"></p>
-                <button class="button restart-button">Restart</button>
+                <img src="img/container.png" alt="Gameover" class="container" />
+                <div class="gameover-info">
+                    <h1 class="title">Game Over</h1>
+                    <h2 class="title-score">Score:</h2>
+                    <h2 data-score-display class="score">10</h2>
+                    <h2 class="title-score">Wrong answers:</h2>
+                    <h2 id="game-over-wrong-answers" class="score">10</h2>
+                    <button id="restart-button" class="button">Restart</button>
+                </div>
             </div>
         </div>
     </body>
