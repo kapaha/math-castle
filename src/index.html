@@ -8,16 +8,16 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Luckiest+Guy&family=Merriweather&display=swap"
             rel="stylesheet"
         />
-        <title>Castle Game</title>
+        <title>Math Castlè</title>
     </head>
     <body>
         <div id="container">
             <div id="start-page">
                 <h1 id="game-title" class="title blur-background">
-                    Math Cast<span id="le">le</span>
+                    Math Cast<span id="le">lè</span>
                 </h1>
                 <div id="instructions">
                     <h2 class="instructions-header blur-background">
@@ -50,19 +50,29 @@
                     Score:
                     <span data-score-display></span>
                 </p>
-                <div id="game-board">
-                    <div id="castle">
-                        <p id="castle-lives"></p>
+                <div id="game-board-container">
+                    <div id="game-board">
+                        <div id="castle">
+                            <p id="castle-lives"></p>
+                        </div>
                     </div>
+                    <form class="answer-form">
+                        <label for="answer-input">Enter Answer</label>
+                        <input
+                            type="text"
+                            id="answer-input"
+                            autocomplete="off"
+                        />
+                    </form>
                 </div>
-                <form class="answer-form">
-                    <label for="answer-input">Enter Answer</label>
-                    <input type="text" id="answer-input" autocomplete="off" />
-                </form>
             </div>
 
             <div id="game-over-page">
-                <img src="img/container.png" alt="Gameover" class="container" />
+                <img
+                    src="./img/container.png"
+                    alt="Gameover"
+                    class="container"
+                />
                 <div class="gameover-info">
                     <h1 class="title">Game Over</h1>
                     <h2 class="title-score">Score:</h2>
