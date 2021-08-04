@@ -29,7 +29,7 @@ h2 {
 #start-page,
 #game-over-page,
 #difficulty-select-page {
-    height: 100vh;
+    height: 750px;
     width: 100%;
     background-color: #003638;
     color: #f3f2c9;
@@ -50,13 +50,21 @@ h2 {
     cursor: pointer;
     color: #f3f2c9;
     font-size: 1.5rem;
-    padding: 11px 23px;
+    padding: 14px 23px 8px 23px;
     text-decoration: none;
 }
 
 .button:active {
     position: relative;
     top: 1px;
+}
+
+.blur-background {
+    background-color: #2779c3;
+    border-radius: 10px;
+    opacity: 70%;
+    padding: 0.5rem 1rem 0.3rem 1rem;
+    margin: 1rem;
 }
 
 /* ********  START PAGE  ******** */
@@ -68,13 +76,12 @@ h2 {
 }
 
 .start-button {
-    margin-top: 300px;
     font-size: 40px;
-    width: 450px;
-    height: 90px;
+    width: 20rem;
+    height: 5rem;
+    padding-top: 25px;
     border: solid white 3px;
     box-shadow: 0px 15px 1px rgba(19, 69, 115, 0.8);
-    /* transition: box-shadow 0.1s ease-in; */
 }
 
 .start-button:hover {
@@ -94,7 +101,7 @@ h2 {
 
 .instructions-header {
     font-family: 'Merriweather', serif;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
 }
 
 .instructions-paragraph {
@@ -210,7 +217,7 @@ h2 {
 }
 
 .pause-button {
-    width: 10rem;
+    width: 12rem;
 }
 
 /* ********  GAME-OVER-PAGE  ******** */
