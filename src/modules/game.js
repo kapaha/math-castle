@@ -31,7 +31,7 @@ const homeButton = document.querySelector('#home-button');
 
 const settings = { ...DEFAULT_SETTINGS };
 const timers = {};
-const fieldWidth = gameBoard.width - castle.width;
+const fieldWidth = gameBoard.width - (castle.width - 70);
 const engine = new Engine(update, draw);
 
 let gameState = GAMESTATES.MENU;
