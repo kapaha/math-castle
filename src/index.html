@@ -41,29 +41,34 @@
             </div>
 
             <div id="game-page">
-                <button class="button pause-button">Pause</button>
-                <button id="home-button" class="button pause-button">
-                    Home
-                </button>
-                <p id="game-timer"></p>
-                <p id="game-score">
-                    Score:
-                    <span data-score-display></span>
-                </p>
                 <div id="game-board-container">
-                    <div id="game-board">
-                        <div id="castle">
-                            <p id="castle-lives"></p>
-                        </div>
+                    <div id="game-board-menu">
+                        <button class="button pause-button">Pause</button>
+                        <p id="game-score">
+                            Score:
+                            <span data-score-display></span>
+                        </p>
+                        <p id="game-timer"></p>
+                        <p id="castle-lives-header">Health:</p>
+                        <p id="castle-lives"></p>
+                        <button id="home-button" class="button pause-button">
+                            Home
+                        </button>
                     </div>
-                    <form class="answer-form">
-                        <label for="answer-input">Enter Answer</label>
-                        <input
-                            type="text"
-                            id="answer-input"
-                            autocomplete="off"
-                        />
-                    </form>
+
+                    <div id="game-board">
+                        <div id="castle"></div>
+                    </div>
+                    <div id="answer-form-container">
+                        <form class="answer-form">
+                            <input
+                                type="text"
+                                id="answer-input"
+                                autocomplete="off"
+                                placeholder="ENTER YOUR ANSWER"
+                            />
+                        </form>
+                    </div>
                 </div>
             </div>
 

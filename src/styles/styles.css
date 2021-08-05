@@ -29,6 +29,9 @@ h2 {
 #start-page,
 #game-over-page,
 #difficulty-select-page {
+    background-image: url('../img/start.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 750px;
     width: 100%;
     background-color: #003638;
@@ -70,9 +73,6 @@ h2 {
 /* ********  START PAGE  ******** */
 #start-page {
     display: flex;
-    background-image: url('../img/start.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 .start-button {
@@ -115,6 +115,11 @@ h2 {
 /* ********  GAME-PAGE  ******** */
 
 #game-page {
+    width: 100%;
+    height: 750px;
+    background-image: url('../img/start.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     position: absolute;
     display: none;
     flex-direction: column;
@@ -123,40 +128,54 @@ h2 {
 }
 
 #game-board-container {
-    background-image: url('../img/container.png');
-    background-size: 141% 139%;
-    background-position: center;
     padding: 40px 46px;
-    outline: 3px solid chocolate;
-    background-position-y: -104px;
-}
-
-#game-score {
-    font-size: 1rem;
-    position: absolute;
-    left: 50%;
-    top: 80px;
-    transform: translate(-50%, 0);
-}
-
-#game-timer {
-    font-size: 4rem;
-    position: absolute;
-    left: 50%;
-    top: 10px;
-    transform: translate(-50%, 0);
+    width: 80%;
+    margin: auto;
 }
 
 #game-board {
     background-image: url('../img/field.png');
     background-size: 24cm 11cm;
     background-repeat: no-repeat;
+    border-radius: 10px;
     margin: auto;
     background-color: rgb(69, 115, 136);
     height: var(--game-board-height);
     width: 900px;
     position: relative;
-    margin-top: 48px;
+}
+
+#game-board-menu,
+#answer-form-container {
+    background-color: #55c690;
+    border: 5px solid #f3f2c9;
+    border-radius: 10px;
+    color: #f3f2c9;
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#game-board-menu .button,
+#game-timer {
+    background-color: #ff7678;
+    border-radius: 10px;
+    padding: 14px 23px 8px 23px;
+    margin: 1rem;
+}
+
+#game-board-menu .button:hover {
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75) inset;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75) inset;
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75) inset;
+    transition: 0.3s ease all;
+}
+
+#game-score,
+#castle-lives,
+#castle-lives-header {
+    margin-top: 15px;
 }
 
 /* castle styles */
@@ -172,11 +191,6 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#castle-lives {
-    color: white;
-    font-size: 4rem;
 }
 
 /* enemy style */
@@ -213,12 +227,7 @@ h2 {
 
 /* Answer form styles */
 .answer-form {
-    background-color: #ce8154;
-    border-right: 5px solid #764529;
-    border-bottom: 5px solid #764529;
-    border-left: 5px solid #764529;
     width: 900px;
-    /* margin: 0.8rem auto; */
     padding: 1rem;
     display: flex;
     justify-content: center;
@@ -226,6 +235,7 @@ h2 {
 }
 
 #answer-input {
+    background-color: #f3f2c9;
     margin-left: 10px;
     width: 300px;
     font-size: 1rem;
@@ -233,9 +243,10 @@ h2 {
 }
 
 .answer-form label {
+    font-size: 1.5rem;
     color: #f3f2c9;
-    letter-spacing: 1.5px;
-    padding-top: 4px;
+    letter-spacing: 2.5px;
+    padding-top: 8px;
 }
 
 .pause-button {
