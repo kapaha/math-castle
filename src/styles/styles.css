@@ -273,3 +273,61 @@ h2 {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+/* ********  Question History Styles  ******** */
+
+#table-container {
+    max-height: 500px;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+#question-history {
+    background-color: #ce7f54;
+    color: black;
+    min-width: 450px;
+}
+
+#question-history tr {
+    white-space: nowrap;
+}
+
+#question-history,
+#question-history th,
+#question-history td {
+    border: 2px solid black;
+    border-collapse: collapse;
+    font-family: sans-serif;
+}
+
+#question-history th,
+#question-history td {
+    padding: 0.75em;
+}
+
+.question-history-answer {
+    font-family: sans-serif;
+    display: inline-block;
+    padding: 0 0.5em;
+    border-radius: 0.25em;
+    min-width: 35px;
+    max-height: 35px;
+    line-height: 35px;
+}
+
+.question-history-answer + .question-history-answer {
+    margin-left: 0.5em;
+}
+
+.question-history-correct-answer {
+    background-color: #2ecc71;
+}
+
+.question-history-wrong-answer {
+    background-color: #e74c3c;
+}
+
+.fa-heart-broken {
+    line-height: 35px;
+    padding-left: 0.12em;
+}

@@ -1,12 +1,13 @@
 import gameBoard from './gameBoard';
 import castle from './castle';
-import Enemy from './enemy';
+import Enemy, { ENEMY_EVENT_TYPES, createEnemyEvent } from './enemy';
 import Timer from './timer';
 import questionGenerator from './questionGenerator';
 import scoreHandler from './scoreHandler';
 import DEFAULT_SETTINGS from './defaultSettings';
 import { hideElement, showElement } from './domUtils';
 import Engine from './engine';
+import populateQuestionHistory from './questionHistory';
 
 const GAMESTATES = {
     MENU: 0,
@@ -22,7 +23,6 @@ const difficultySelectPage = document.querySelector('#difficulty-select-page');
 const answerForm = document.querySelector('.answer-form');
 const answerInput = document.querySelector('#answer-input');
 const gameTimer = document.querySelector('#game-timer');
-const wrongAnswersEl = document.querySelector('#game-over-wrong-answers');
 const startButton = document.querySelector('.start-button');
 const restartButton = document.querySelector('#restart-button');
 const pauseButton = document.querySelector('.pause-button');
@@ -36,8 +36,8 @@ const engine = new Engine(update, draw);
 
 let gameState = GAMESTATES.MENU;
 let selectedEnemy = null;
-let wrongAnswers = 0;
 let enemies = [];
+let questionHistory = [];
 
 // PRIVATE FUNCTIONS
 
@@ -70,6 +70,8 @@ function deleteEnemy(element) {
             selectedEnemy = null;
         }
 
+        questionHistory.push(enemy.getQuestionInfo());
+
         return false;
     });
 }
@@ -90,15 +92,22 @@ function handleAnswerSubmit(event) {
     if (!selectedEnemy || answerInput.value.trim() === '') return;
 
     const correctAnswer = selectedEnemy.question.answer.toString();
-    const userAnswer = answerInput.value;
 
-    if (userAnswer === correctAnswer) {
+    const enemyEvent = createEnemyEvent(
+        ENEMY_EVENT_TYPES.QUESTION_ANSWERED,
+        answerInput.value
+    );
+
+    selectedEnemy.addEvent(enemyEvent);
+
+    if (enemyEvent.answer.value === correctAnswer) {
+        enemyEvent.answer.isCorrect = true;
         selectedEnemy.handleDelete();
         selectedEnemy = null;
         scoreHandler.addPoints(settings.POINTS.CORRECT_ANSWER);
     } else {
+        enemyEvent.answer.isCorrect = false;
         scoreHandler.addPoints(settings.POINTS.WRONG_ANSWER);
-        wrongAnswers += 1;
     }
 
     answerInput.value = '';
@@ -127,7 +136,7 @@ function damageCastle(amount) {
 
 function gameOver() {
     gameState = GAMESTATES.GAMEOVER;
-    wrongAnswersEl.textContent = wrongAnswers;
+    populateQuestionHistory(questionHistory, settings.lastAnswersToShow);
     hideElement(gamePage);
     showElement(gameOverPage, 'flex');
 }
@@ -136,10 +145,10 @@ function reset() {
     settings.enemySpeed = DEFAULT_SETTINGS.enemySpeed;
     initialiseTimers();
     scoreHandler.reset();
-    wrongAnswers = 0;
     answerInput.value = '';
     castle.setup(settings.castleStartingLives);
     enemies.forEach((enemy) => enemy.handleDelete());
+    questionHistory = [];
 }
 
 function start(selectedDifficulty) {

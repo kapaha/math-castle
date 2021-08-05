@@ -11,6 +11,10 @@
             href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
             rel="stylesheet"
         />
+        <script
+            src="https://kit.fontawesome.com/4323c15833.js"
+            crossorigin="anonymous"
+        ></script>
         <title>Castle Game</title>
     </head>
     <body>
@@ -43,7 +47,12 @@
                 </div>
                 <form class="answer-form">
                     <label for="answer-input">Enter Answer</label>
-                    <input type="text" id="answer-input" autocomplete="off" />
+                    <input
+                        type="number"
+                        max="10000"
+                        id="answer-input"
+                        autocomplete="off"
+                    />
                 </form>
             </div>
 
@@ -53,8 +62,20 @@
                     <h1 class="title">Game Over</h1>
                     <h2 class="title-score">Score:</h2>
                     <h2 data-score-display class="score">10</h2>
-                    <h2 class="title-score">Wrong answers:</h2>
-                    <h2 id="game-over-wrong-answers" class="score">10</h2>
+                    <h2 class="title-score">Question History</h2>
+
+                    <div id="table-container">
+                        <table id="question-history">
+                            <thead>
+                                <tr>
+                                    <th>Questions</th>
+                                    <th>Your Last 3 Answers</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
                     <button id="restart-button" class="button">Restart</button>
                 </div>
             </div>
