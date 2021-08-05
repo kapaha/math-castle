@@ -2,6 +2,22 @@
     --game-board-height: 345px;
 }
 
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #f3f2c9;
+    opacity: 70%; /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #f3f2c9;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #f3f2c9;
+}
+
 * {
     text-align: center;
     font-family: 'Luckiest Guy', cursive;
@@ -29,7 +45,10 @@ h2 {
 #start-page,
 #game-over-page,
 #difficulty-select-page {
-    height: 100vh;
+    background-image: url('../img/start.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 750px;
     width: 100%;
     background-color: #003638;
     color: #f3f2c9;
@@ -50,7 +69,7 @@ h2 {
     cursor: pointer;
     color: #f3f2c9;
     font-size: 1.5rem;
-    padding: 11px 23px;
+    padding: 14px 23px 8px 23px;
     text-decoration: none;
 }
 
@@ -59,22 +78,26 @@ h2 {
     top: 1px;
 }
 
+.blur-background {
+    background-color: #2779c3;
+    border-radius: 10px;
+    opacity: 70%;
+    padding: 0.5rem 1rem 0.3rem 1rem;
+    margin: 1rem;
+}
+
 /* ********  START PAGE  ******** */
 #start-page {
     display: flex;
-    background-image: url('../img/start.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 .start-button {
-    margin-top: 300px;
     font-size: 40px;
-    width: 450px;
-    height: 90px;
+    width: 20rem;
+    height: 5rem;
+    padding-top: 25px;
     border: solid white 3px;
     box-shadow: 0px 15px 1px rgba(19, 69, 115, 0.8);
-    /* transition: box-shadow 0.1s ease-in; */
 }
 
 .start-button:hover {
@@ -94,7 +117,7 @@ h2 {
 
 .instructions-header {
     font-family: 'Merriweather', serif;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
 }
 
 .instructions-paragraph {
@@ -108,6 +131,11 @@ h2 {
 /* ********  GAME-PAGE  ******** */
 
 #game-page {
+    width: 100%;
+    height: 750px;
+    background-image: url('../img/start.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     position: absolute;
     display: none;
     flex-direction: column;
@@ -115,47 +143,75 @@ h2 {
     z-index: 0;
 }
 
-#game-score {
-    font-size: 1rem;
-    position: absolute;
-    left: 50%;
-    top: 80px;
-    transform: translate(-50%, 0);
-}
-
-#game-timer {
-    font-size: 4rem;
-    position: absolute;
-    left: 50%;
-    top: 10px;
-    transform: translate(-50%, 0);
+#game-board-container {
+    padding: 40px 46px;
+    width: 80%;
+    margin: auto;
 }
 
 #game-board {
+    background-image: url('../img/field.png');
+    background-size: 54cm 11cm;
+    background-repeat: no-repeat;
+    border-radius: 17px;
+    display: flex;
     margin: auto;
     background-color: rgb(69, 115, 136);
     height: var(--game-board-height);
-    width: 900px;
+    width: 1000px;
     position: relative;
-    margin-top: 100px;
+}
+
+#game-board-menu {
+    background-color: #55c690;
+    border: 4px solid #f3f2c9;
+    border-radius: 17px;
+    color: #f3f2c9;
+    display: flex;
+    margin: 1rem auto;
+    font-size: 2rem;
+    justify-content: space-around;
+    align-items: center;
+    width: 1000px;
+}
+
+#game-board-menu .button,
+#game-timer {
+    background-color: #ff7678;
+    border: 4px solid #f3f2c9;
+    border-radius: 17px;
+    font-weight: bold;
+    padding: 14px 23px 8px 23px;
+    margin: 0.5rem;
+}
+
+#game-board-menu .button:hover {
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75) inset;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75) inset;
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75) inset;
+    transition: 0.3s ease all;
+}
+
+#game-score,
+#castle-lives,
+#castle-lives-header {
+    margin-top: 15px;
 }
 
 /* castle styles */
 #castle {
-    width: 200px;
+    background-image: url('../img/castle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 137px;
     height: var(--game-board-height);
     position: absolute;
     top: 0;
     right: 0;
-    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#castle-lives {
-    color: white;
-    font-size: 4rem;
+    z-index: 1;
 }
 
 /* enemy style */
@@ -191,26 +247,36 @@ h2 {
 }
 
 /* Answer form styles */
-.answer-form {
-    background-color: lightblue;
-    width: 900px;
-    margin: 1rem auto;
-    padding: 1rem;
+#answer-form-container {
+    display: flex;
+    justify-content: center;
+}
 
+.answer-form {
+    width: 900px;
+    padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #answer-input {
-    margin-left: 10px;
-    width: 300px;
-    font-size: 1rem;
-    padding: 0.25em 0.5em;
+    color: #f3f2c9;
+    background-color: #55c690;
+    border: 4px solid #f3f2c9;
+    border-radius: 17px;
+    margin: 0 auto;
+    width: 350px;
+    font-size: 1.5rem;
+    padding: 1rem 2rem 0.6rem 2rem;
+}
+
+#answer-input:focus {
+    outline: none;
 }
 
 .pause-button {
-    width: 10rem;
+    width: 12rem;
 }
 
 /* ********  GAME-OVER-PAGE  ******** */
