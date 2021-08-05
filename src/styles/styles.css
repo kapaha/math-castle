@@ -160,6 +160,7 @@ h2 {
     height: var(--game-board-height);
     width: 1000px;
     position: relative;
+    overflow: hidden;
 }
 
 #game-board-menu {
@@ -217,8 +218,7 @@ h2 {
 /* enemy style */
 .enemy {
     position: absolute;
-    background-color: red;
-    border-radius: 50%;
+    image-rendering: pixelated;
 }
 
 .enemy-question {
@@ -234,7 +234,7 @@ h2 {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    bottom: calc(100% + 5px);
+    bottom: 97%;
 }
 
 .enemy.selected .enemy-question {
