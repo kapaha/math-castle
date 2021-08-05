@@ -158,11 +158,13 @@ function restart() {
 
 function pause() {
     gameState = GAMESTATES.PAUSED;
+    answerInput.disabled = true;
     enemies.forEach((enemy) => enemy.element.classList.add('not-clickable'));
 }
 
 function unPause() {
     gameState = GAMESTATES.RUNNING;
+    answerInput.disabled = false;
     enemies.forEach((enemy) => enemy.element.classList.remove('not-clickable'));
 }
 
@@ -207,6 +209,7 @@ function handleDifficultySelect(event) {
 }
 
 function handleHomeButtonClick() {
+    if (gameState === GAMESTATES.PAUSED) handlePause();
     engine.stop();
     gameState = GAMESTATES.MENU;
     hideElement(gamePage);
