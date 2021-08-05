@@ -1,6 +1,6 @@
 const castle = {
     height: 400,
-    width: 150,
+    width: 137,
     lives: null,
     elements: {
         container: document.getElementById('castle'),

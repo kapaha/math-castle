@@ -2,6 +2,22 @@
     --game-board-height: 345px;
 }
 
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #f3f2c9;
+    opacity: 70%; /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #f3f2c9;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #f3f2c9;
+}
+
 * {
     text-align: center;
     font-family: 'Luckiest Guy', cursive;
@@ -135,34 +151,38 @@ h2 {
 
 #game-board {
     background-image: url('../img/field.png');
-    background-size: 24cm 11cm;
+    background-size: 54cm 11cm;
     background-repeat: no-repeat;
-    border-radius: 10px;
+    border-radius: 17px;
+    display: flex;
     margin: auto;
     background-color: rgb(69, 115, 136);
     height: var(--game-board-height);
-    width: 900px;
+    width: 1000px;
     position: relative;
 }
 
-#game-board-menu,
-#answer-form-container {
+#game-board-menu {
     background-color: #55c690;
-    border: 5px solid #f3f2c9;
-    border-radius: 10px;
+    border: 4px solid #f3f2c9;
+    border-radius: 17px;
     color: #f3f2c9;
     display: flex;
+    margin: 1rem auto;
     font-size: 2rem;
     justify-content: space-around;
     align-items: center;
+    width: 1000px;
 }
 
 #game-board-menu .button,
 #game-timer {
     background-color: #ff7678;
-    border-radius: 10px;
+    border: 4px solid #f3f2c9;
+    border-radius: 17px;
+    font-weight: bold;
     padding: 14px 23px 8px 23px;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
 #game-board-menu .button:hover {
@@ -183,7 +203,7 @@ h2 {
     background-image: url('../img/castle.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 150px;
+    width: 137px;
     height: var(--game-board-height);
     position: absolute;
     top: 0;
@@ -191,6 +211,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 /* enemy style */
@@ -226,6 +247,11 @@ h2 {
 }
 
 /* Answer form styles */
+#answer-form-container {
+    display: flex;
+    justify-content: center;
+}
+
 .answer-form {
     width: 900px;
     padding: 1rem;
@@ -235,18 +261,18 @@ h2 {
 }
 
 #answer-input {
-    background-color: #f3f2c9;
-    margin-left: 10px;
-    width: 300px;
-    font-size: 1rem;
-    padding: 0.25em 0.5em;
+    color: #f3f2c9;
+    background-color: #55c690;
+    border: 4px solid #f3f2c9;
+    border-radius: 17px;
+    margin: 0 auto;
+    width: 350px;
+    font-size: 1.5rem;
+    padding: 1rem 2rem 0.6rem 2rem;
 }
 
-.answer-form label {
-    font-size: 1.5rem;
-    color: #f3f2c9;
-    letter-spacing: 2.5px;
-    padding-top: 8px;
+#answer-input:focus {
+    outline: none;
 }
 
 .pause-button {
