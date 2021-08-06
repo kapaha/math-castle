@@ -10,7 +10,7 @@ const DEFAULT_SETTINGS = {
         CASTLE_LIFE_LOST: -10,
     },
     enemySpeed: 30,
-    enemySpeedIncrement: 3,
+    enemySpeedIncrement: 1,
     spawnTimerMs: 2700,
     gameTimerMs: 300000,
     questionDifficulty: 'medium',
