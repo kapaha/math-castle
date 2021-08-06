@@ -38,6 +38,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    user-select: none;
 }
 
 /* ********  COMMON STYLES  ******** */
@@ -199,6 +200,10 @@ h2 {
     margin-top: 15px;
 }
 
+.ui-value {
+    margin-left: 0.25em;
+}
+
 /* castle styles */
 #castle {
     background-image: url(images/castle.png);
@@ -275,6 +280,10 @@ h2 {
 
 #answer-input:focus {
     outline: none;
+}
+
+#answer-input:disabled {
+    background-color: #ff7678;
 }
 
 .pause-button {
