@@ -1,8 +1,8 @@
 const DEFAULT_SETTINGS = {
     SPAWN_POINTS: {
-        FIRST_LANE: { x: 0, y: 50 },
-        SECOND_LANE: { x: 0, y: 165 },
-        THIRD_LANE: { x: 0, y: 280 },
+        FIRST_LANE: { x: -100, y: 35 },
+        SECOND_LANE: { x: -100, y: 135 },
+        THIRD_LANE: { x: -100, y: 235 },
     },
     POINTS: {
         CORRECT_ANSWER: 10,
