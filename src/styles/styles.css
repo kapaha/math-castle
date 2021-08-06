@@ -199,6 +199,10 @@ h2 {
     margin-top: 15px;
 }
 
+.ui-value {
+    margin-left: 0.25em;
+}
+
 /* castle styles */
 #castle {
     background-image: url('../img/castle.png');
