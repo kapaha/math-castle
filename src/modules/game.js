@@ -28,6 +28,7 @@ const restartButton = document.querySelector('#restart-button');
 const pauseButton = document.querySelector('.pause-button');
 const difficultyButtons = document.querySelectorAll('[data-difficulty');
 const homeButton = document.querySelector('#home-button');
+const gameOverTitle = document.querySelector('#game-over-title');
 
 const settings = { ...DEFAULT_SETTINGS };
 const timers = {};
@@ -76,12 +77,16 @@ function deleteEnemy(element) {
     });
 }
 
+function handleWin() {
+    gameOver('You Win!');
+}
+
 function initialiseTimers() {
     // spawn enemy every 2.5 seconds
     timers.spawnTimer = Timer(settings.spawnTimerMs, spawnEnemy);
 
     // end game after 300000 ms (5 minutes)
-    timers.gameTimer = Timer(settings.gameTimerMs, gameOver, {
+    timers.gameTimer = Timer(settings.gameTimerMs, handleWin, {
         autoRestart: false,
     });
 }
@@ -134,10 +139,11 @@ function damageCastle(amount) {
     castle.damage(amount, gameOver);
 }
 
-function gameOver() {
+function gameOver(titleText) {
     gameState = GAMESTATES.GAMEOVER;
     populateQuestionHistory(questionHistory, settings.lastAnswersToShow);
     hideElement(gamePage);
+    gameOverTitle.textContent = titleText || 'Game Over';
     showElement(gameOverPage, 'flex');
 }
 
