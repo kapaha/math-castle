@@ -1,3 +1,5 @@
+import createEnemySpriteSheet from './createEnemySpriteSheet';
+
 function Enemy({
     position: { x, y },
     speed,
@@ -7,8 +9,9 @@ function Enemy({
     damageCastle,
     deleteEnemy,
 } = {}) {
-    const width = 50;
-    const height = 50;
+    const enemySpriteSheet = createEnemySpriteSheet();
+    const width = enemySpriteSheet.frameWidth;
+    const height = enemySpriteSheet.frameHeight;
     const position = { x, y };
     const element = createElement();
 
@@ -27,6 +30,13 @@ function Enemy({
         questionElement.classList.add('enemy-question');
         questionElement.textContent = question.text;
 
+        // sprite styles
+        enemyElement.style.backgroundImage = `url(${enemySpriteSheet.sprite.src})`;
+        enemyElement.style.backgroundPosition =
+            enemySpriteSheet.getBackgroundPosition();
+        enemyElement.style.backgroundSize =
+            enemySpriteSheet.getBackgroundSize();
+
         enemyElement.appendChild(questionElement);
 
         enemyElement.addEventListener('click', handleSelectEnemy);
@@ -35,7 +45,7 @@ function Enemy({
     }
 
     function hasHitCastle() {
-        return position.x >= fieldWidth - width;
+        return position.x >= fieldWidth - width / 2;
     }
 
     // PUBLIC FUNCTIONS
@@ -46,14 +56,19 @@ function Enemy({
             damageCastle(1);
             return;
         }
+
         // multiply speed by deltaTime in seconds
         // for consistent movement across different framerates
         position.x += speed * (deltaTime / 1000);
+
+        enemySpriteSheet.update(deltaTime);
     }
 
     function draw() {
         // draw the enemy to different position
         element.style.transform = `translate(${position.x}px, ${position.y}px)`;
+        element.style.backgroundPosition =
+            enemySpriteSheet.getBackgroundPosition();
     }
 
     function handleDelete() {
