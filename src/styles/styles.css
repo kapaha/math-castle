@@ -282,6 +282,10 @@ h2 {
     outline: none;
 }
 
+#answer-input:disabled {
+    background-color: #ff7678;
+}
+
 .pause-button {
     width: 12rem;
 }
