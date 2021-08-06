@@ -1,5 +1,10 @@
 import createEnemySpriteSheet from './createEnemySpriteSheet';
 
+const ENEMY_EVENT_TYPES = Object.freeze({
+    HIT_CASTLE: 0,
+    QUESTION_ANSWERED: 1,
+});
+
 function Enemy({
     position: { x, y },
     speed,
@@ -14,6 +19,7 @@ function Enemy({
     const height = enemySpriteSheet.frameHeight;
     const position = { x, y };
     const element = createElement();
+    const events = [];
 
     // PRIVATE FUNCTIONS
 
@@ -53,6 +59,7 @@ function Enemy({
     function update(deltaTime) {
         if (hasHitCastle()) {
             handleDelete();
+            events.push(createEnemyEvent(ENEMY_EVENT_TYPES.HIT_CASTLE));
             damageCastle(1);
             return;
         }
@@ -80,11 +87,25 @@ function Enemy({
         element.classList.toggle('selected');
     }
 
+    function addEvent(event) {
+        events.push(event);
+    }
+
+    function getQuestionInfo() {
+        return {
+            text: question.text,
+            answer: question.answer,
+            events,
+        };
+    }
+
     return Object.freeze({
         update,
         draw,
         handleDelete,
         toggleSelect,
+        addEvent,
+        getQuestionInfo,
         question,
         get element() {
             return element;
@@ -92,4 +113,14 @@ function Enemy({
     });
 }
 
-export default Enemy;
+function createEnemyEvent(type, answerValue = null, answerIsCorrect = false) {
+    return {
+        type,
+        answer: {
+            value: answerValue,
+            isCorrect: answerIsCorrect,
+        },
+    };
+}
+
+export { Enemy as default, createEnemyEvent, ENEMY_EVENT_TYPES };

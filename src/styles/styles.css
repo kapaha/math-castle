@@ -279,6 +279,19 @@ h2 {
     width: 12rem;
 }
 
+/* Remove number input handles  */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
 /* ********  GAME-OVER-PAGE  ******** */
 
 #game-over-page {
@@ -291,15 +304,34 @@ h2 {
 }
 
 .gameover-info {
-    z-index: 999;
+    --border-size: 30px;
+    --border-radius: 30px;
+    background-color: #774526;
+    width: 900px;
+    border: var(--border-size) solid #ce7f54;
+    border-radius: var(--border-radius);
+    position: relative;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-#game-over-page .container {
+.gameover-info::before {
+    --offset: 67px;
+    background: none;
+    border: 30px solid #774526;
+    border-radius: var(--border-radius);
+    content: '';
+    display: block;
     position: absolute;
-    z-index: 0;
-    width: 90%;
-    height: auto;
-    text-align: center;
+    z-index: -1;
+    top: calc(var(--border-size) - var(--offset));
+    right: calc(var(--border-size) - var(--offset));
+    bottom: calc(var(--border-size) - var(--offset));
+    left: calc(var(--border-size) - var(--offset));
+    pointer-events: none;
 }
 
 #game-over-page .title {
@@ -313,6 +345,7 @@ h2 {
 #game-over-page .title-score {
     font-size: 2rem;
     color: #ce7f54;
+    margin-bottom: 1rem;
     text-shadow: 0px 3px 0px #5b321c;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: rgba(255, 255, 255, 0.1);
@@ -322,6 +355,11 @@ h2 {
     font-size: 2rem;
     color: white;
     text-shadow: 0px 4px 0px #5b321c;
+    margin-left: 0.1em;
+}
+
+#game-over-page .title-question-history {
+    margin-bottom: 0;
 }
 
 #restart-button {
@@ -338,4 +376,62 @@ h2 {
     background-image: url('../img/start.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+/* ********  Question History Styles  ******** */
+
+#table-container {
+    max-height: 300px;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+#question-history {
+    background-color: #ce7f54;
+    color: black;
+    min-width: 450px;
+}
+
+#question-history tr {
+    white-space: nowrap;
+}
+
+#question-history,
+#question-history th,
+#question-history td {
+    border-collapse: collapse;
+    font-family: sans-serif;
+    color: #2e1a0f;
+}
+
+#question-history th,
+#question-history td {
+    padding: 0.75em;
+    border: 2px solid #5b321c;
+}
+
+.question-history-answer {
+    font-family: sans-serif;
+    display: inline-block;
+    padding: 0 0.5em;
+    border-radius: 0.25em;
+    min-width: 35px;
+    max-height: 35px;
+    line-height: 35px;
+}
+
+.question-history-answer + .question-history-answer {
+    margin-left: 0.5em;
+}
+
+.question-history-correct-answer {
+    background-color: #2ecc71;
+}
+
+.question-history-wrong-answer {
+    background-color: #e74c3c;
+}
+
+.fa-heart-broken {
+    line-height: 35px;
 }

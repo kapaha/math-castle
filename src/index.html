@@ -11,6 +11,10 @@
             href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Luckiest+Guy&family=Merriweather&display=swap"
             rel="stylesheet"
         />
+        <script
+            src="https://kit.fontawesome.com/4323c15833.js"
+            crossorigin="anonymous"
+        ></script>
         <title>Math Castlè</title>
     </head>
     <body>
@@ -61,7 +65,8 @@
                     <div id="answer-form-container">
                         <form class="answer-form">
                             <input
-                                type="text"
+                                type="number"
+                                max="10000"
                                 id="answer-input"
                                 autocomplete="off"
                                 placeholder="ENTER YOUR ANSWER"
@@ -72,17 +77,27 @@
             </div>
 
             <div id="game-over-page">
-                <img
-                    src="./img/container.png"
-                    alt="Gameover"
-                    class="container"
-                />
                 <div class="gameover-info">
                     <h1 class="title">Game Over</h1>
-                    <h2 class="title-score">Score:</h2>
-                    <h2 data-score-display class="score">10</h2>
-                    <h2 class="title-score">Wrong answers:</h2>
-                    <h2 id="game-over-wrong-answers" class="score">10</h2>
+                    <h2 class="title-score">
+                        Score: <span data-score-display class="score">10</span>
+                    </h2>
+                    <h2 class="title-score title-question-history">
+                        Question History
+                    </h2>
+
+                    <div id="table-container">
+                        <table id="question-history">
+                            <thead>
+                                <tr>
+                                    <th>Questions</th>
+                                    <th>Your Answers</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
                     <button id="restart-button" class="button">Restart</button>
                 </div>
             </div>

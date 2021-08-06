@@ -15,6 +15,7 @@ const DEFAULT_SETTINGS = {
     gameTimerMs: 300000,
     questionDifficulty: 'medium',
     castleStartingLives: 3,
+    lastAnswersToShow: 5,
 };
 
 export default DEFAULT_SETTINGS;
