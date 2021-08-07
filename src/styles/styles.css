@@ -125,12 +125,16 @@ h2 {
 }
 
 .instructions-header {
-    font-family: 'Merriweather', serif;
-    padding-bottom: 0.5rem;
+    font-family: 'Luckiest Guy', cursive;
+    font-weight: 400;
+    letter-spacing: 2px;
+    padding-top: 0.35em;
+    border: 3px solid #f3f2c9;
 }
 
 .instructions-paragraph {
-    font-size: 1rem;
+    font-family: sans-serif;
+    font-size: 1.2rem;
     width: 60%;
     border: 3px solid #f3f2c9;
     padding: 3rem;
