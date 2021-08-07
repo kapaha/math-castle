@@ -97,7 +97,7 @@ h2 {
     width: 20rem;
     height: 5rem;
     padding-top: 25px;
-    border: solid white 3px;
+    border: solid #f3f2c9 3px;
     box-shadow: 0px 15px 1px rgba(19, 69, 115, 0.8);
 }
 
@@ -122,11 +122,36 @@ h2 {
 }
 
 .instructions-paragraph {
+    font-size: 1rem;
     width: 60%;
     border: 3px solid #f3f2c9;
-    padding: 4rem;
+    padding: 3rem;
     line-height: 1.5;
+    letter-spacing: 2px;
     text-align: center;
+}
+
+/* start-page-footer */
+
+#start-page-footer {
+    position: fixed;
+    bottom: 0;
+    padding: 0.5rem;
+    width: 100%;
+    height: 3rem;
+    background-color: #2779c3;
+    border-top: 3px solid #f3f2c9;
+    opacity: 70%;
+}
+
+#start-page-footer a {
+    text-decoration: none;
+    color: #f3f2c9;
+    margin-left: 1rem;
+}
+
+#start-page-footer span {
+    margin: 0 1px;
 }
 
 /* ********  GAME-PAGE  ******** */
