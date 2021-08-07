@@ -124,8 +124,9 @@ h2 {
 .instructions-paragraph {
     width: 60%;
     border: 3px solid #f3f2c9;
-    padding: 4rem;
+    padding: 3rem;
     line-height: 1.5;
+    letter-spacing: 2px;
     text-align: center;
 }
 
