@@ -103,11 +103,11 @@ h2 {
     height: 5rem;
     padding-top: 25px;
     border: solid #f3f2c9 3px;
-    box-shadow: 0px 15px 1px rgba(19, 69, 115, 0.8);
 }
 
 .start-button:hover {
     box-shadow: none;
+    box-shadow: 0px 15px 1px rgba(19, 69, 115, 0.8);
 }
 
 #le {
