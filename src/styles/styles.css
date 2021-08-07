@@ -92,6 +92,11 @@ h2 {
     display: flex;
 }
 
+#game-title {
+    width: 700px;
+    image-rendering: pixelated;
+}
+
 .start-button {
     font-size: 40px;
     width: 20rem;
