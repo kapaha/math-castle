@@ -228,7 +228,7 @@ function handleHomeButtonClick() {
     engine.stop();
     gameState = GAMESTATES.MENU;
     hideElement(gamePage);
-    showElement(difficultySelectPage, 'flex');
+    showElement(startPage, 'flex');
 }
 
 // PUBLIC FUNCTIONS
