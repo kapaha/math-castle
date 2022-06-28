@@ -7,7 +7,8 @@
 <p align="center">
   <a href="#about">About</a> •
   <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a>
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#the-team">The Team</a>
 </p>
 
 ![screenshot](./.github/readme_files/math_castle_demo.gif)
@@ -49,7 +50,7 @@ npm start
 ```
 
 ## The Team
-<table align="center">
+<table>
     <tr>
         <td align="center">
             <a href="https://github.com/kapaha">
