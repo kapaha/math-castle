@@ -2,7 +2,7 @@
     <img src="./.github/readme_files/title.png" alt="Math Castle" width="500">
 </h1>
 
-<h4 align="center">A children's mathematical learning game</h4>
+<h4 align="center">A tower defence mathematics learning game.</h4>
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
@@ -20,6 +20,7 @@
 * **Score system** - receive points when a question is answered correctly and lose points when a wrong answer is given or when the castle is hit by a enemy
 
 ## How to use
+
 To clone this repository, you will need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)).
 
 ```bash
