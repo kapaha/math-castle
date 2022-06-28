@@ -1,9 +1,12 @@
 <h1 align="center">
-    <br>
-    <img src="./.github/readme_files/math_castle.png" alt="math castle game" width="500">
-    <br>
-    Math Castle
-    <br>
+    <img src="./dist/images/title.png" alt="Math Castle" width="500">
 </h1>
 
-<h2 align="center">A children's mathematical learning game</h2>
+<h4 align="center">A children's mathematical learning game</h4>
+
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Use</a>
+</p>
+
+![screenshot](./.github/readme_files/math_castle_demo.gif)
