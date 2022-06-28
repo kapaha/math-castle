@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="./dist/images/title.png" alt="Math Castle" width="500">
+    <img src="./.github/readme_files/title.png" alt="Math Castle" width="500">
 </h1>
 
 <h4 align="center">A children's mathematical learning game</h4>
