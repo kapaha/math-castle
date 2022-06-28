@@ -47,3 +47,49 @@ npm install
 # Run in development mode
 npm start
 ```
+
+## The Team
+<table align="center">
+    <tr>
+        <td align="center">
+            <a href="https://github.com/kapaha">
+                <img src="https://avatars.githubusercontent.com/u/62726177?v=4" width="100px;" alt="Kai Paterson-Hall"/>
+                <br />
+                <sub>
+                    <b>Kai Paterson-Hall</b>
+                </sub>
+            </a>
+            <br />
+        </td>
+        <td align="center">
+            <a href="https://github.com/tanselbay1">
+                <img src="https://avatars.githubusercontent.com/u/58618654?v=4" width="100px;" alt="Tansel Bayraktaroglu"/>
+                <br />
+                <sub>
+                    <b>Tansel Bayraktaroglu</b>
+                </sub>
+            </a>
+            <br />
+        </td>
+        <td align="center">
+            <a href="https://github.com/dwarjie">
+                <img src="https://avatars.githubusercontent.com/u/37862404?v=4" width="100px;" alt="Mark"/>
+                <br />
+                <sub>
+                    <b>Mark</b>
+                </sub>
+            </a>
+            <br />
+        </td>
+        <td align="center">
+            <a href="https://github.com/Ocoldwell">
+                <img src="https://avatars.githubusercontent.com/u/75363386?v=4" width="100px;" alt="Ollie Coldwell"/>
+                <br />
+                <sub>
+                    <b>Ollie Coldwell</b>
+                </sub>
+            </a>
+            <br />
+        </td>
+    </tr>
+</table>
