@@ -11,8 +11,7 @@
   <a href="#the-team">The Team</a>
 </p>
 
-![screenshot](./.github/readme_files/math_castle_demo.gif)
-
+<img src="./.github/readme_files/math_castle_demo.gif" alt="Math Castle Demo" align="center">
 ## About
 
 This game was created for the [TOP Jam 1- Edutainment](https://itch.io/jam/top-jam-1), which was a game jam hosted by The Odin Project, where teams of a maximum of 4 had to create a game with the theme of education and entertainment. Each team had around a month to complete the game. The game had to be DOM only (no HTML canvas) and use tech taught by or closely related to The Odin Project, so no game frameworks like Unity or Phaser.js were allowed. At the end of the game jam, each game was scored on different criteria by a group of judges.
