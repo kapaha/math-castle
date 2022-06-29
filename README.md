@@ -11,16 +11,12 @@
   <a href="#the-team">The Team</a>
 </p>
 
-<<<<<<< HEAD
 <div align="center">
     <img
         src="./.github/readme_files/math_castle_demo.gif"
         alt="Math Castle Demo"
     >
 </div>
-=======
-<img src="./.github/readme_files/math_castle_demo.gif" alt="Math Castle Demo" align="center">
->>>>>>> 2b347ed4c49d5b60e3fe11433f273571e36303d6
 
 ## About
 
@@ -103,3 +99,4 @@ npm start
         </td>
     </tr>
 </table>
+****
