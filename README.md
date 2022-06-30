@@ -6,9 +6,11 @@
 
 <p align="center">
   <a href="#about">About</a> •
+  <a href="#what-we-learned-from-this-project">What We Learned From This Project</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#the-team">The Team</a>
+  
 </p>
 
 <div align="center">
@@ -26,7 +28,20 @@ There was a forum given to everyone who wanted to participate, so that we could 
 
 ![Game Jam Results](./.github/readme_files/game_jam_results.png)
 
-For the tech side of things, we used a fixed time step engine approach that utilised the window.requestAnimationFrame function. This allowed us to call update and render functions at a consistent 60 times per second. The update functions would update all values related to the game objects, such as the enemy positions, and the render functions would translate this information into the CSS to create the animations. To ensure code consistency between the team, we utilised ESLint and Prettier to lint and format our code. For deployment, we decided to go with Github Pages, where we utilised Github Actions and our Webpack bundle for continuous deployment.
+For the tech side of things, we used a fixed time step engine approach that utilised the window.requestAnimationFrame function. This allowed us to call update and render functions at a consistent 60 times per second. The update functions would update all values related to the game objects, such as the enemy positions, and the render functions would translate this information into the CSS to create the animations.
+
+## What We Learned From This Project
+
+* Using pull requests to peer review code
+* Git branch workflow
+* Working with people in different time zones
+* Using Trello to organise a project and work with Agile (Kanban for this case) Methodology
+* Some of the team members weren't active for personal reasons, so we had to compensate for this by being effcient with our time
+* Setting up team meetings on discord
+* Using ESLint and Prettier for keeping the team's code style consistent using best practises
+* ES6 Modules (Reusable code blocks); code separation for maintainability and readability
+* Webpack for bundling our code
+* Github actions for continuous deployment
 
 ## Key Features
 
